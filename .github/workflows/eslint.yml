@@ -1,0 +1,34 @@
+name: prettier-check
+
+env:
+  NODEJS_VERSION: '22'
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '**.mjs'
+      - '**.js'
+  pull_request:
+    paths:
+      - '**.mjs'
+      - '**.js'
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./js
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Do setup-node
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODEJS_VERSION }}
+          check-latest: true
+      - name: Do npm install
+        run: npm install
+      - name: Do lint
+        run: npm run lint
