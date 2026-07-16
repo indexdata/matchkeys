@@ -10,6 +10,10 @@ on:
 jobs:
   prettier-check:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./js
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -18,8 +22,6 @@ jobs:
         with:
           node-version: ${{ env.NODEJS_VERSION }}
           check-latest: true
-      - name: Do cd js
-        run: cd js
       - name: Do npm install
         run: npm install
       - name: Do prettier-check
