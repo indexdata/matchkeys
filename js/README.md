@@ -96,7 +96,7 @@ See all available scripts listed in the [package.json](package.json) file.
 
 Prior to commit, do the following steps.
 
-Note that Workflow [Actions](../actions) will conduct the checks on changes to relevant files.
+Note that Workflow [Actions](https://github.com/indexdata/matchkeys/actions) will conduct the checks on changes to relevant files.
 
 ### prettier
 
