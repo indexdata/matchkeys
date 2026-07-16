@@ -6,7 +6,11 @@ env:
 on:
   workflow_dispatch:
   push:
-
+    paths:
+      - '**.mjs'
+      - '**.js'
+      - '**.json'
+      - '.prettierrc'
 jobs:
   prettier-check:
     runs-on: ubuntu-latest
