@@ -1,0 +1,26 @@
+name: prettier-check
+
+env:
+  NODEJS_VERSION: '22'
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  prettier-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Do setup-node
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODEJS_VERSION }}
+          check-latest: true
+      - name: Do cd js
+        run: cd js
+      - name: Do npm install
+        run: npm install
+      - name: Do prettier-check
+        run: npm run prettier-check
