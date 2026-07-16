@@ -1,4 +1,4 @@
-name: prettier-check
+name: eslint
 
 env:
   NODEJS_VERSION: '22'
