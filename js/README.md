@@ -94,7 +94,9 @@ Do 'npm install' to install and configure ESLint and Prettier.
 
 See all available scripts listed in the [package.json](package.json) file.
 
-Prior to commit, do the following steps:
+Prior to commit, do the following steps.
+
+Note that Workflow [Actions](../actions) will conduct the checks on changes to relevant files.
 
 ### prettier
 
