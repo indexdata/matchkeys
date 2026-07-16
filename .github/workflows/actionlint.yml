@@ -1,0 +1,27 @@
+name: actionlint
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/**'
+  pull_request:
+    paths:
+      - '.github/**'
+
+permissions:
+  contents: read
+
+jobs:
+  actionlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Run actionlint
+        uses: raven-actions/actionlint@v2
+        # with:
+          # overly pedantic quoting requirements
+          # flags: -ignore SC2046 -ignore SC2086
