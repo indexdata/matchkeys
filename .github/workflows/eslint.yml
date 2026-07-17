@@ -1,6 +1,7 @@
 name: eslint
 
 env:
+  documentation: 'https://github.com/indexdata/matchkeys/blob/main/js/README.md#verify-matchkeys-development'
   NODEJS_VERSION: '22'
 
 on:
@@ -21,6 +22,9 @@ jobs:
         shell: bash
         working-directory: ./js
     steps:
+      - name: Show documentation
+        run: |
+          echo "Documentation: ${{ env.documentation }}" | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Checkout repository
         uses: actions/checkout@v6
       - name: Do setup-node
