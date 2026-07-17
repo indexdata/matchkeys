@@ -10,10 +10,12 @@ on:
     paths:
       - '**.mjs'
       - '**.js'
+      - 'package*.json'
   pull_request:
     paths:
       - '**.mjs'
       - '**.js'
+      - 'package*.json'
 jobs:
   eslint:
     runs-on: ubuntu-latest
