@@ -1,0 +1,28 @@
+---
+version: 2
+updates:
+
+  # GitHub Workflows
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "cron"
+      cronjob: "35 06 * * FRI"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    labels: ["deps"]
+
+  # npm
+  - package-ecosystem: "npm"
+    directory: "/js"
+    schedule:
+      interval: "cron"
+      cronjob: "55 06 * * FRI"
+    commit-message:
+      prefix: "update"
+      include: scope
+    labels: ["deps"]
+    groups:
+      all:
+        patterns: ["*"]
