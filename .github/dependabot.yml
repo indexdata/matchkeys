@@ -7,7 +7,7 @@ updates:
     directory: "/"
     schedule:
       interval: "cron"
-      cronjob: "35 06 * * FRI"
+      cronjob: "12 01 * * SAT"
     commit-message:
       prefix: "ci"
       include: "scope"
@@ -18,10 +18,14 @@ updates:
     directory: "/js"
     schedule:
       interval: "cron"
-      cronjob: "55 06 * * FRI"
+      cronjob: "38 01 * * SAT"
     commit-message:
       prefix: "update"
       include: scope
+    ignore:
+      - dependency-name: "eslint"
+        update-types:
+          - "version-update:semver-major"
     labels: ["deps"]
     groups:
       all:
