@@ -19,6 +19,9 @@ updates:
     schedule:
       interval: "cron"
       cronjob: "38 01 * * SAT"
+    cooldown:
+      default-days: 7
+      semver-major-days: 30
     commit-message:
       prefix: "update"
       include: scope
