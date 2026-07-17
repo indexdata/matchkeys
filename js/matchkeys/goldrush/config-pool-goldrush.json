@@ -1,0 +1,5 @@
+{
+  "id": "goldrush",
+  "matcher": "goldrush-matcher::matchkey",
+  "update": "ingest"
+}

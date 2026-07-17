@@ -1,0 +1,5 @@
+{
+  "id": "deepdish",
+  "matcher": "deepdish-matcher::matchkey",
+  "update": "ingest"
+}

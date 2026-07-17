@@ -1,0 +1,5 @@
+{
+  "id": "malort",
+  "matcher": "malort-matcher::matchkey",
+  "update": "ingest"
+}
