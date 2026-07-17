@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - '.github/**'
+      - '.github/workflows/**'
   pull_request:
     paths:
-      - '.github/**'
+      - '.github/workflows/**'
 
 permissions:
   contents: read
