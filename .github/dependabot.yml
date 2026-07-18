@@ -7,7 +7,7 @@ updates:
     directory: "/"
     schedule:
       interval: "cron"
-      cronjob: "12 01 * * SAT"
+      cronjob: "12 01 * * MON"
     commit-message:
       prefix: "ci"
       include: "scope"
@@ -18,7 +18,7 @@ updates:
     directory: "/js"
     schedule:
       interval: "cron"
-      cronjob: "38 01 * * SAT"
+      cronjob: "38 01 * * MON"
     cooldown:
       default-days: 7
       semver-major-days: 30
