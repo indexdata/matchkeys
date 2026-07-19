@@ -53,3 +53,18 @@ jobs:
           for changed_file in ${{ steps.files.outputs.all }}; do
             echo "changed_file: ${changed_file}"
           done
+
+      - name: Determine matchkeys
+        id: determine-matchkeys
+        env:
+          FILES_LIST: ${{ steps.files.outputs.all }}
+        run: |
+          matchkeys=$(python3 ../.github/workflows/scripts/determine_matchkeys.py -l info)
+          echo "matchkeys=$matchkeys" | tee -a "$GITHUB_OUTPUT"
+
+      - name: Show determined matchkeys
+        env:
+          MATCHKEYS: ${{ steps.determine-matchkeys.outputs.matchkeys }}
+        run: |
+          echo "Determined matchkeys: $MATCHKEYS" | tee -a "$GITHUB_STEP_SUMMARY"
+
