@@ -1,3 +1,4 @@
+// test comment #1
 import fs from 'fs';
 import path from 'path';
 import { matchkey } from '../matchkeys/goldrush2024/goldrush.mjs';
