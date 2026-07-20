@@ -73,7 +73,10 @@ jobs:
           fi
 
       - name: Run test of relevant matchkeys
+        env:
+          MATCHKEYS: ${{ steps.determine-matchkeys.outputs.matchkeys }}
+        if: ${{ steps.determine-matchkeys.outputs.matchkeys != '' }}
         run: |
-          for matchkey in ${{ steps.determine-matchkeys.outputs.matchkeys }}; do
+          for matchkey in $MATCHKEYS; do
             echo "Running test: ${matchkey}"
           done
