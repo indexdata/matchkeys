@@ -13,7 +13,7 @@ import re
 from pathlib import Path
 import sys
 
-SCRIPT_VERSION = "1.0.0"
+SCRIPT_VERSION = "1.0.1"
 
 LOGLEVELS = {
     "debug": logging.DEBUG,
@@ -63,7 +63,7 @@ def main():
     Determine relevant matchkeys from the list of touched files.
 
     Returns:
-        Array of matchkey names.
+        Space-delimited string of matchkey names.
     """
     files_list = get_options()
     LOGGER.debug("files_list=%s", files_list)
@@ -83,7 +83,7 @@ def main():
         if match:
             matchkeys.add(match.group(1))
     LOGGER.info("Determined %s matchkeys.", len(matchkeys))
-    print(list(matchkeys))
+    print(" ".join(matchkeys))
 
 
 if __name__ == "__main__":
