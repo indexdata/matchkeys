@@ -66,5 +66,14 @@ jobs:
         env:
           MATCHKEYS: ${{ steps.determine-matchkeys.outputs.matchkeys }}
         run: |
-          echo "Determined matchkeys: $MATCHKEYS" | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ -n "$MATCHKEYS" ]; then
+            echo "Determined modified matchkeys: $MATCHKEYS" | tee -a "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No modified matchkeys were determined." | tee -a "$GITHUB_STEP_SUMMARY"
+          fi
 
+      - name: Run test of relevant matchkeys
+        run: |
+          for matchkey in ${{ steps.determine-matchkeys.outputs.matchkeys }}; do
+            echo "Running test: ${matchkey}"
+          done
