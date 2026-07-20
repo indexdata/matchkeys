@@ -84,14 +84,6 @@ jobs:
             # FIXME: Disabled: npm run "test-${matchkey}"
           done
 
-      - name: Method 2 -- Get changed files (pull_request)
-        if: github.event_name == 'pull_request'
-        id: changes-pr
-        run: |
-          git fetch origin ${{ github.base_ref }}
-          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
-          echo "changed-files=$CHANGED_FILES" | tee -a "$GITHUB_OUTPUT"
-
       - name: Method 2 -- Get changed files (push)
         if: github.event_name == 'push'
         id: changes-push
@@ -99,6 +91,14 @@ jobs:
           git fetch origin ${{ github.ref_name }}
           CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }})
           echo "changed_files=$CHANGED_FILES" | tee -a "$GITHUB_OUTPUT"
+
+      - name: Method 2 -- Get changed files (pull_request)
+        if: github.event_name == 'pull_request'
+        id: changes-pr
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          echo "changed-files=$CHANGED_FILES" | tee -a "$GITHUB_OUTPUT"
 
       - name: Method 2 -- Show list of files
         run: |
