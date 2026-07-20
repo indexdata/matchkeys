@@ -12,14 +12,14 @@ on:
     paths:
       - '**.mjs'
       - '**.js'
-      - 'test/**.json'
+      - 'js/test/**.json'
       - '.github/workflows/verify-matchkey.yml'
   pull_request:
     types: [opened, synchronize, reopened]
     paths:
       - '**.mjs'
       - '**.js'
-      - 'test/**.json'
+      - 'js/test/**.json'
 jobs:
   verify-matchkey:
     runs-on: ubuntu-latest
