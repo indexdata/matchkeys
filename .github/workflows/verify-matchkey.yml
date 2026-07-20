@@ -66,5 +66,25 @@ jobs:
         env:
           MATCHKEYS: ${{ steps.determine-matchkeys.outputs.matchkeys }}
         run: |
-          echo "Determined matchkeys: $MATCHKEYS" | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ -n "$MATCHKEYS" ]; then
+            echo "Determined modified matchkeys: $MATCHKEYS" | tee -a "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No modified matchkeys were determined." | tee -a "$GITHUB_STEP_SUMMARY"
+          fi
 
+      - name: Run test of relevant matchkeys
+        env:
+          MATCHKEYS: ${{ steps.determine-matchkeys.outputs.matchkeys }}
+        if: ${{ steps.determine-matchkeys.outputs.matchkeys != '' }}
+        run: |
+          echo "See the run step logs for test results." >> "$GITHUB_STEP_SUMMARY"
+          for matchkey in $MATCHKEYS; do
+            test_script="test/${matchkey}.mjs"
+            if [ -f "$test_script" ]; then
+              echo "Running test: ${matchkey} ..." | tee -a "$GITHUB_STEP_SUMMARY"
+              npm run "test-${matchkey}"
+            else
+              echo "The test script '${test_script}' does not exist."
+              exit 1
+            fi
+          done
