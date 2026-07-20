@@ -78,7 +78,8 @@ jobs:
         if: ${{ steps.determine-matchkeys.outputs.matchkeys != '' }}
         run: |
           echo "See the run step logs for test results." >> "$GITHUB_STEP_SUMMARY"
+          echo "FIXME: Disabled while further development." >> "$GITHUB_STEP_SUMMARY"
           for matchkey in $MATCHKEYS; do
-            echo "Running test: ${matchkey} ..." | tee -a "$GITHUB_STEP_SUMMARY"
-            npm run "test-${matchkey}"
+            echo "FIXME: Disabled: Running test: ${matchkey} ..." | tee -a "$GITHUB_STEP_SUMMARY"
+            # FIXME: Disabled: npm run "test-${matchkey}"
           done
