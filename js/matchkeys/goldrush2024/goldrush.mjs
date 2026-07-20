@@ -1,5 +1,5 @@
 // Generates GoldRush match key.
-// test comment #1
+// test comment #2
 
 function loadMarcJson(record) {
   const marcObj = JSON.parse(record).marc;
