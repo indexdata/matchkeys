@@ -77,6 +77,8 @@ jobs:
           MATCHKEYS: ${{ steps.determine-matchkeys.outputs.matchkeys }}
         if: ${{ steps.determine-matchkeys.outputs.matchkeys != '' }}
         run: |
+          echo "See the run step logs for test results." >> "$GITHUB_STEP_SUMMARY"
           for matchkey in $MATCHKEYS; do
-            echo "Running test: ${matchkey}"
+            echo "Running test: ${matchkey} ..." | tee -a "$GITHUB_STEP_SUMMARY"
+            npm run "test-${matchkey}"
           done
