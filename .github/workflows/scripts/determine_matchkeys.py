@@ -13,7 +13,7 @@ import re
 from pathlib import Path
 import sys
 
-SCRIPT_VERSION = "1.0.1"
+SCRIPT_VERSION = "1.0.2"
 
 LOGLEVELS = {
     "debug": logging.DEBUG,
@@ -82,6 +82,10 @@ def main():
         match = re.search(test_assertion_re, input_fn)
         if match:
             matchkeys.add(match.group(1))
+        # Handle some special files:
+        if input_fn == "js/test/assertions-deepdish-goldrush2024.json":
+            matchkeys.add("deepdish")
+            matchkeys.discard("deepdish-goldrush2024")
     LOGGER.info("Determined %s matchkeys.", len(matchkeys))
     print(" ".join(matchkeys))
 
