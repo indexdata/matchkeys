@@ -3,6 +3,7 @@ import path from 'path';
 import { matchkey } from '../matchkeys/worksVDE/worksVDE.mjs';
 
 function assert(result, message) {
+  console.log(result, message);
   if (result) {
     console.log('Passed assertion');
   } else {
@@ -13,7 +14,7 @@ function assert(result, message) {
 
 const assertionsFile = 'test/assertions-worksVDE.json';
 const assertionsJson = fs.readFileSync(assertionsFile, 'utf8');
-const assertionsMalort = JSON.parse(assertionsJson);
+const assertionsVde = JSON.parse(assertionsJson);
 let testsNum = 0;
 let testsFailedNum = 0;
 const testsPath = 'test/records/vde';
@@ -29,12 +30,12 @@ for (let n = 0; n < testFiles.length; n += 1) {
     const marcJson = JSON.parse(marcJsonStr);
     const payloadJson = { marc: marcJson };
     const payloadJsonStr = JSON.stringify(payloadJson);
-    key = matchkey(payloadJsonStr);
-    console.log(key);
+    const keyArr = matchkey(payloadJsonStr);
+    key = JSON.stringify(keyArr);
   } catch (e) {
     key = e.message;
   }
-  const assertion = assertionsMalort[testFile];
+  const assertion = assertionsVde[testFile];
   if (!assert(key === assertion, assertion)) {
     testsFailedNum += 1;
   }
