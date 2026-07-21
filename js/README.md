@@ -106,7 +106,7 @@ The various matchkeys implementations are explained at [js/matchkeys](matchkeys)
 
 Each matchkey has its own directory (e.g. [js/matchkeys/goldrush2024](matchkeys/goldrush2024)) with a README, and example Reservoir configuration files, and the matchkey implementation as a JavaScript module `.mjs` file.
 
-Each matchkey has tests in the [js/test](tests) directory with a JavaScript module (e.g. [js/test/goldrush2024.mjs](test/goldrush2024.mjs)), and a set of assertions (e.g. [js/test/assertions-goldrush2024.json](test/assertions-goldrush2024.json)) which declare the expected matchkey result for processing each associated example record.
+Each matchkey has tests in the [js/test](test) directory with a JavaScript module (e.g. [js/test/goldrush2024.mjs](test/goldrush2024.mjs)), and a set of assertions (e.g. [js/test/assertions-goldrush2024.json](test/assertions-goldrush2024.json)) which declare the expected matchkey result for processing each associated example record.
 
 The directory [js/test/records](test/records) holds the MARC JSON records. There can be sub-directories to organise the records. Records can be associated with multiple matchkeys, so if records are modified then ensure that the related assertions are adjusted to suit.
 
