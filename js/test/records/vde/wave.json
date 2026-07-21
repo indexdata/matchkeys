@@ -1,0 +1,407 @@
+{
+  "leader": "01998cam a2200337 i 4500",
+  "fields": [
+    {
+      "001": "9998647447707876"
+    },
+    {
+      "008": "230318t20232023ilu           000 p eng d"
+    },
+    {
+      "020": {
+        "subfields": [
+          {
+            "a": "9798985787412"
+          },
+          {
+            "q": "paperback"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "035": {
+        "subfields": [
+          {
+            "a": "(OCoLC)1372278570"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "035": {
+        "subfields": [
+          {
+            "a": "(EXLNZ-01NYU_NETWORK)9999673334107871"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "040": {
+        "subfields": [
+          {
+            "a": "YDX"
+          },
+          {
+            "b": "eng"
+          },
+          {
+            "e": "rda"
+          },
+          {
+            "c": "YDX"
+          },
+          {
+            "d": "BDX"
+          },
+          {
+            "d": "IWA"
+          },
+          {
+            "d": "YDX"
+          },
+          {
+            "d": "CDX"
+          },
+          {
+            "d": "OCLCO"
+          },
+          {
+            "d": "UMC"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "050": {
+        "subfields": [
+          {
+            "a": "PS3551.R4846"
+          },
+          {
+            "b": "W38 2023"
+          }
+        ],
+        "ind1": " ",
+        "ind2": "4"
+      }
+    },
+    {
+      "082": {
+        "subfields": [
+          {
+            "a": "811/.54"
+          },
+          {
+            "2": "23/eng/20231019"
+          }
+        ],
+        "ind1": "0",
+        "ind2": "4"
+      }
+    },
+    {
+      "100": {
+        "subfields": [
+          {
+            "a": "Arnold, Elizabeth,"
+          },
+          {
+            "d": "1958-"
+          },
+          {
+            "e": "author."
+          },
+          {
+            "1": "https://uat.svde.org/agents/601766488493709"
+          },
+          {
+            "4": "https://uat.svde.org/roles/aut"
+          }
+        ],
+        "ind1": "1",
+        "ind2": " "
+      }
+    },
+    {
+      "245": {
+        "subfields": [
+          {
+            "a": "Wave house /"
+          },
+          {
+            "c": "Elizabeth Arnold."
+          }
+        ],
+        "ind1": "1",
+        "ind2": "0"
+      }
+    },
+    {
+      "264": {
+        "subfields": [
+          {
+            "a": "Chicago :"
+          },
+          {
+            "b": "Flood Editions,"
+          },
+          {
+            "c": "[2023]"
+          },
+          {
+            "9": "https://uat.svde.org/agents/541766485884100"
+          },
+          {
+            "1": "https://uat.svde.org/provisionActivities/1531769516076141"
+          }
+        ],
+        "ind1": " ",
+        "ind2": "1"
+      }
+    },
+    {
+      "264": {
+        "subfields": [
+          {
+            "c": "©2023"
+          }
+        ],
+        "ind1": " ",
+        "ind2": "4"
+      }
+    },
+    {
+      "300": {
+        "subfields": [
+          {
+            "a": "112 pages ;"
+          },
+          {
+            "c": "23 cm"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "336": {
+        "subfields": [
+          {
+            "a": "text"
+          },
+          {
+            "b": "txt"
+          },
+          {
+            "2": "rdacontent"
+          },
+          {
+            "0": "http://rdaregistry.info/termList/RDAContentType/1020"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "337": {
+        "subfields": [
+          {
+            "a": "unmediated"
+          },
+          {
+            "b": "n"
+          },
+          {
+            "2": "rdamedia"
+          },
+          {
+            "0": "http://rdaregistry.info/termList/RDAMediaType/1007"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "338": {
+        "subfields": [
+          {
+            "a": "volume"
+          },
+          {
+            "b": "nc"
+          },
+          {
+            "2": "rdacarrier"
+          },
+          {
+            "0": "http://rdaregistry.info/termList/RDACarrierType/1049"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "520": {
+        "subfields": [
+          {
+            "a": "\"Elizabeth Arnold's poems are structures for our times: built to move and to hold. Within them surge the elemental forces, the earth's deep patterns and the human-driven, breakneck hurts--and the poet's own migratory mind, coming honestly to terms with her restless and embattled life.\"-- From back cover."
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "655": {
+        "subfields": [
+          {
+            "a": "poetry."
+          },
+          {
+            "2": "aat"
+          },
+          {
+            "1": "https://uat.svde.org/subjects/1201769513743159"
+          }
+        ],
+        "ind1": " ",
+        "ind2": "7"
+      }
+    },
+    {
+      "655": {
+        "subfields": [
+          {
+            "a": "Poetry."
+          },
+          {
+            "2": "lcgft"
+          },
+          {
+            "1": "https://uat.svde.org/subjects/1201769513743159"
+          }
+        ],
+        "ind1": " ",
+        "ind2": "7"
+      }
+    },
+    {
+      "655": {
+        "subfields": [
+          {
+            "a": "Poésie."
+          },
+          {
+            "2": "rvmgf"
+          },
+          {
+            "1": "https://uat.svde.org/subjects/1201769513743175"
+          }
+        ],
+        "ind1": " ",
+        "ind2": "7"
+      }
+    },
+    {
+      "933": {
+        "subfields": [
+          {
+            "a": "overlay"
+          },
+          {
+            "c": "automated"
+          },
+          {
+            "u": "20240926213014.0"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "935": {
+        "subfields": [
+          {
+            "a": "ybpid_19578964"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "994": {
+        "subfields": [
+          {
+            "a": "92"
+          },
+          {
+            "b": "ZYU"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "758": {
+        "subfields": [
+          {
+            "4": "http://rdaregistry.info/Elements/m/P30004"
+          },
+          {
+            "1": "http://worldcat.org/oclc/1372278570"
+          }
+        ],
+        "ind1": " ",
+        "ind2": " "
+      }
+    },
+    {
+      "996": {
+        "subfields": [
+          {
+            "a": "Wave house"
+          },
+          {
+            "9": "https://uat.svde.org/opuses/1531769516076117"
+          },
+          {
+            "9": "https://uat.svde.org/works/1531769516076153"
+          },
+          {
+            "9": "https://uat.svde.org/instances/1531769516076121"
+          }
+        ],
+        "ind1": "1",
+        "ind2": "0"
+      }
+    },
+    {
+      "997": {
+        "subfields": [
+          {
+            "a": "NYU"
+          }
+        ],
+        "ind1": "1",
+        "ind2": "0"
+      }
+    }
+  ]
+}
