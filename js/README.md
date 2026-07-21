@@ -2,14 +2,25 @@
 
 ## Table of contents
 
-<!-- md2toc -l 2 -h 3 README.md -->
+<!-- okapi/doc/md2toc -l 2 -h 4 README.md -->
 * [Matchkeys](#matchkeys)
 * [Transformers](#transformers)
     * [999 subfield definitions](#999-subfield-definitions)
-* [Verify matchkeys development](#verify-matchkeys-development)
-    * [prettier](#prettier)
-    * [lint](#lint)
-    * [Conduct tests](#conduct-tests)
+        * [999 10 (source holdings record)](#999-10-source-holdings-record)
+        * [999 11 (library items)](#999-11-library-items)
+        * [999 12 (online items)](#999-12-online-items)
+        * [999 13 (vendor entries)](#999-13-vendor-entries)
+* [Development of matchkeys](#development-of-matchkeys)
+    * [Overview](#overview)
+    * [editorconfig](#editorconfig)
+    * [Verify matchkeys development](#verify-matchkeys-development)
+        * [prettier](#prettier)
+        * [lint](#lint)
+        * [Conduct tests](#conduct-tests)
+* [GitHub Workflows Actions](#github-workflows-actions)
+    * [prettier-check](#prettier-check)
+    * [eslint](#eslint)
+    * [verify-matchkey](#verify-matchkey)
 
 ## Matchkeys
 
@@ -87,8 +98,28 @@ collects MARC fields from all member records and creates field `999_10` for each
 }
 ```
 
+## Development of matchkeys
 
-## Verify matchkeys development
+### Overview
+
+The various matchkeys implementations are explained at [js/matchkeys](matchkeys).
+
+Each matchkey has its own directory (e.g. [js/matchkeys/goldrush2024](matchkeys/goldrush2024)) with a README, and example Reservoir configuration files, and the matchkey implementation as a JavaScript module `.mjs` file.
+
+Each matchkey has tests in the [js/test](tests) directory with a JavaScript module (e.g. [js/test/goldrush2024.mjs](test/goldrush2024.mjs)), and a set of assertions (e.g. [js/test/assertions-goldrush2024.json](test/assertions-goldrush2024.json)) which declare the expected matchkey result for processing each associated example record.
+
+The directory [js/test/records](test/records) holds the MARC JSON records. There can be sub-directories to organise the records. Records can be associated with multiple matchkeys, so if records are modified then ensure that the related assertions are adjusted to suit.
+
+For each matchkey there is an entry in the [js/package.json](package.json) file to declare its test to be run using Node.js (e.g. `test-goldrush2024`).
+
+To add a new matchkey, follow the structure of an existing matchkey.
+
+### editorconfig
+
+There is a [.editorconfig](../.editorconfig) file at the top-level of this repository.
+See notes to [Configure your editor](https://dev.folio.org/faqs/how-to-use-editorconfig/).
+
+### Verify matchkeys development
 
 Do 'npm install' to install and configure ESLint and Prettier.
 
@@ -96,9 +127,9 @@ See all available scripts listed in the [package.json](package.json) file.
 
 Prior to commit, do the following steps.
 
-Note that Workflow [Actions](https://github.com/indexdata/matchkeys/actions) will conduct the checks on changes to relevant files.
+Note that [Workflow Actions](#github-workflows-actions) will conduct the checks on changes to relevant files.
 
-### prettier
+#### prettier
 
 See if any files need to be re-formatted:
 
@@ -112,7 +143,7 @@ If so then do re-format:
 npm run prettier
 ```
 
-### lint
+#### lint
 
 Then assess code quality with ESLint:
 
@@ -127,7 +158,7 @@ If any are highlighted as automatically fixable, then can do:
 npm run lint -- --fix
 ```
 
-### Conduct tests
+#### Conduct tests
 
 Ensure that the matchkey tests do pass.
 
@@ -139,3 +170,29 @@ For example do:
 ```
 npm run test-goldrush2024
 ```
+
+## GitHub Workflows Actions
+
+There is a set of [Workflow Actions](https://github.com/indexdata/matchkeys/actions) for development and deployment.
+
+### prettier-check
+
+The [prettier-check](https://github.com/indexdata/matchkeys/actions/workflows/prettier-check.yml) Workflow will be triggered by any modification to JavaScript and JSON files.
+
+See documentation above for the pre-commit [prettier](#prettier) checks and fixes.
+
+### eslint
+
+The [eslint](https://github.com/indexdata/matchkeys/actions/workflows/eslint.yml) Workflow will be triggered by any modification to JavaScript files or changes to the [package.json](package.json) file.
+
+See documentation above for the pre-commit [lint](#lint) checks and fixes.
+
+### verify-matchkey
+
+The [verify-matchkey](https://github.com/indexdata/matchkeys/actions/workflows/verify-matchkey.yml) Workflow will be triggered by any modification to JavaScript files or JSON files.
+
+See documentation above for the pre-commit [Conduct tests](#conduct-tests) facilities.
+
+The Workflow will discover the changed files and will run the test for each associated matchkey.
+
+Note that there is currently a tiny glitch with this workflow. The first git push for a branch will fail, but subsequent pushes will operate properly. There is a workaround to push an initial branch with no modifications, then push subsequent changes.
