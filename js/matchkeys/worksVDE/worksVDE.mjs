@@ -38,7 +38,7 @@ function getRelevantSubFields(record, tag, sf) {
  * Share-VDE Works match key generation function. Takes a MARC-in-JSON record as input and generates
  * a match key string based on the 996 fields.
  * @param {string} record - The MARC-in-JSON input string wrapped in {marc: ...} object.
- * @return {array} String containing the works URI from 996$9 
+ * @return {array} String containing the works URI from 996$9
  */
 export function matchkey(record) {
   const marcObj = loadMarcJson(record);
