@@ -32,7 +32,6 @@ The [js/matchkeys/malort](malort) creates single record clusters by returning an
 
 The [js/matchkeys/isxn](isxn) for clustering simply around isbn/issn and allow searching on them via SRU.
 
-## Matchkeys tests of development code
+## Development of matchkeys
 
-Do 'cd ..' to change to the 'reservoir/js' directory.
-Follow the instructions there.
+Refer to [development guidelines](../README.md#development-of-matchkeys)
