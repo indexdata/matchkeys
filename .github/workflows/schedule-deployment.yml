@@ -41,6 +41,7 @@ jobs:
             echo "matchkey=${matchkey}"
             if ! [ -d "js/matchkeys/${matchkey}" ]; then
               errors+=("The matchkey '${matchkey}' is not found.")
+              continue
             fi
             sha=$(echo "${deployment}" | cut -d ':' -f 2)
             echo "sha=${sha}"
@@ -48,7 +49,7 @@ jobs:
               errors+=("The SHA is missing for matchkey '${matchkey}'.")
               continue
             fi
-            branch=$(git name-rev --name-only "${sha}" 2>&1 | sed 's/~.*$//')
+            branch=$(git name-rev --name-only "${sha}" 2>&1 | sed 's/[~^].*$//')
             if [[ "${branch}" =~ .*"Could not get".* ]]; then
               errors+=("Could not find SHA '${sha}' for matchkey '${matchkey}'.")
               continue
