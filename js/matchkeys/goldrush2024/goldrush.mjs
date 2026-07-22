@@ -1,4 +1,4 @@
-// Generates GoldRush match key.
+// Generates goldrush2024 matchkey.
 
 function loadMarcJson(record) {
   const marcObj = JSON.parse(record).marc;
