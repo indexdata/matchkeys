@@ -110,6 +110,8 @@ Each matchkey has tests in the [js/test](test) directory with a JavaScript modul
 
 The directory [js/test/records](test/records) holds the MARC JSON records. There can be sub-directories to organise the records. Records can be associated with multiple matchkeys, so if records are modified then ensure that the related assertions are adjusted to suit.
 
+Each matchkey is briefly explained in the [js/matchkeys/README.md](matchkeys/README.md) with a link to its implementation.
+
 For each matchkey there is an entry in the [js/package.json](package.json) file to declare its test to be run using Node.js (e.g. `test-goldrush2024`).
 
 To add a new matchkey, follow the structure of an existing matchkey.
