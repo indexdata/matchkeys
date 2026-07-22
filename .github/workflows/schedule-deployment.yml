@@ -1,0 +1,28 @@
+name: schedule-deployment
+
+env:
+  documentation: 'https://github.com/indexdata/matchkeys/blob/main/js/README.md#schedule-deployment'
+
+on:
+  workflow_dispatch:
+    inputs:
+      deployments:
+        description: 'List of matchkeys with short commit hash SHA e.g. goldrush2024:1163910,isxn:d88522c'
+        required: true
+        type: string
+jobs:
+  schedule-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Show documentation
+        run: |
+          echo "Documentation: ${{ env.documentation }}" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Show input
+        env:
+          DEPLOYMENTS: ${{ inputs.deployments }}
+        run: |
+          echo "schedule deployments: $DEPLOYMENTS"
