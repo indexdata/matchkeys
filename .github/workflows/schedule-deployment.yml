@@ -21,8 +21,13 @@ jobs:
         run: |
           echo "Documentation: ${{ env.documentation }}" | tee -a "$GITHUB_STEP_SUMMARY"
 
-      - name: Show input
+      - name: Verify input
         env:
           DEPLOYMENTS: ${{ inputs.deployments }}
+        shell: bash
         run: |
-          echo "schedule deployments: $DEPLOYMENTS"
+          IFS=', ' read -r -a deployments <<< "${DEPLOYMENTS}"
+          declare -p deployments
+          for deployment in "${deployments[@]}"; do
+            echo "deployment=${deployment}|"
+          done
