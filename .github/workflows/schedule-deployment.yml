@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: Show documentation
         run: |
@@ -48,7 +50,7 @@ jobs:
             fi
             branch=$(git name-rev --name-only "${sha}" 2>&1 | sed 's/~.*$//')
             if [[ "${branch}" =~ .*"Could not get".* ]]; then
-              errors+=("Could not find SHA '${sha}'.")
+              errors+=("Could not find SHA '${sha}' for matchkey '${matchkey}'.")
               continue
             fi
             echo "branch=${branch}"
