@@ -3,7 +3,6 @@ import path from 'path';
 import { matchkey } from '../matchkeys/sharevde/sharevde.mjs';
 
 function assert(result, message) {
-  console.log(result, message);
   if (result) {
     console.log('Passed assertion');
   } else {

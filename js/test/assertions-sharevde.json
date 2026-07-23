@@ -1,3 +1,5 @@
 {
-  "test/records/vde/wave.json": "[\"https://uat.svde.org/works/1531769516076153\",\"https://uat.svde.org/instances/1531769516076121\"]"
+  "test/records/vde/wave.json": "[\"https://uat.svde.org/works/1531769516076153\",\"https://uat.svde.org/instances/1531769516076121\"]",
+  "test/records/vde/invalid-1-broken-json.json":  "Expected ',' or ']' after array element in JSON at position 233",
+  "test/records/vde/invalid-2-no-fields.json":    "MARC fields is not an array."
 }
