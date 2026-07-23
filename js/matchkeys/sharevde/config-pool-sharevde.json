@@ -1,0 +1,5 @@
+{
+  "id": "sharevde",
+  "matcher": "sharevde-matcher::matchkey",
+  "update": "ingest"
+}

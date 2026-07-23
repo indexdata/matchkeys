@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { matchkey } from '../matchkeys/worksVDE/worksVDE.mjs';
+import { matchkey } from '../matchkeys/sharevde/sharevde.mjs';
 
 function assert(result, message) {
   console.log(result, message);
@@ -12,7 +12,7 @@ function assert(result, message) {
   return result;
 }
 
-const assertionsFile = 'test/assertions-worksVDE.json';
+const assertionsFile = 'test/assertions-sharevde.json';
 const assertionsJson = fs.readFileSync(assertionsFile, 'utf8');
 const assertionsVde = JSON.parse(assertionsJson);
 let testsNum = 0;

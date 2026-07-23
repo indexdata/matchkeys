@@ -1,4 +1,4 @@
-// matchkey for ISBN/ISSN and normalize terms for searching via CQL on SRU
+// matchkey for Share-VDE matchkeys stored in the 996$9 field and returns two keys: works and instances
 
 function loadMarcJson(record) {
   const marcObj = JSON.parse(record).marc;
