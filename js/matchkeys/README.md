@@ -38,5 +38,4 @@ The [js/matchkeys/sharevde](sharevde) for clustering on the 996$9 works and inst
 
 ## Matchkeys tests of development code
 
-Do 'cd ..' to change to the 'reservoir/js' directory.
-Follow the instructions there.
+Refer to [development guidelines](../README.md#development-of-matchkeys)
