@@ -1,0 +1,5 @@
+{
+  "id": "shareWorks",
+  "matcher": "shareWorks-matcher::matchkey",
+  "update": "ingest"
+}
