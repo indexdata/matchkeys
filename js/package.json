@@ -11,7 +11,9 @@
     "test-goldrush2021": "node test/goldrush2021.mjs",
     "test-malort": "node test/malort.mjs",
     "test-isxn": "node test/isxn.mjs",
-    "test-sharevde": "node test/sharevde.mjs"
+    "test-sharevde": "node test/sharevde.mjs",
+    "test-shareInsts": "node test/shareInsts.mjs",
+    "test-shareWorks": "node test/shareWorks.mjs"
   },
   "devDependencies": {
     "eslint": "^9.39.5",

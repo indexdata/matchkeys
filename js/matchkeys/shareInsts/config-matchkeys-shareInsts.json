@@ -1,0 +1,5 @@
+{
+  "id": "sharevde-matcher",
+  "type": "javascript",
+  "url": "https://raw.githubusercontent.com/indexdata/matchkeys/refs/heads/main/js/matchkeys/shareInsts/shareInsts.mjs"
+}
