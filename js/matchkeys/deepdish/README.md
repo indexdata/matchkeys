@@ -18,3 +18,9 @@ The purpose of multiple match key values is that _any_ of the values will be eno
 Suppose record ‘a' returns keys ‘1', '2’. Record ‘b' returns key ‘3’. We now have two clusters as none of the values overlap. Suppose we get a third record 'c' with keys ‘2’, ‘3’. The result is one cluster with records ‘a', ‘b’, ‘c’, with saved values ‘1', ‘2, '3’.
 
 For the goldrush2024 components: "Gold Rush - Colorado Alliance MARC record match key generation" (specification dated 4 December 2024).
+
+## Configuration
+
+> [!IMPORTANT]
+> Note that the example configuration refers to its JavaScript implementation via a specific git commit SHA (and might not be current).
+> Operators should manage their own configuration files and not use these examples directly.
