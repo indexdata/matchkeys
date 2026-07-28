@@ -78,3 +78,12 @@ jobs:
 
       - name: Show recent schedule
         run: tail -5 js/schedule-matchkeys.jsonl
+
+      - name: Do git pull
+        run: git pull
+
+      - name: Commit git changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: Apply schedule matchkeys
+          file_pattern: js/schedule-matchkeys.jsonl
