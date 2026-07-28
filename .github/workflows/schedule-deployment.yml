@@ -23,7 +23,8 @@ jobs:
         run: |
           echo "Documentation: ${{ env.documentation }}" | tee -a "$GITHUB_STEP_SUMMARY"
 
-      - name: Verify input
+      - name: Verify inputs
+        id: verify-inputs
         env:
           DEPLOYMENTS: ${{ inputs.deployments }}
         shell: bash
@@ -31,6 +32,7 @@ jobs:
           IFS=', ' read -r -a deployments <<< "${DEPLOYMENTS//[[:blank:]]/}"
           # declare -p deployments
           declare -a errors
+          declare -a schedules
           for deployment in "${deployments[@]}"; do
             echo "deployment=${deployment}"
             if [[ ! "${deployment}" =~ : ]]; then
@@ -55,8 +57,16 @@ jobs:
               continue
             fi
             echo "branch=${branch}"
+            schedules+=("${matchkey}:${sha}:${branch}")
           done
           if [ ${#errors[@]} -gt 0 ]; then
             printf "ERROR: %s\n" "${errors[@]}"
             exit 1
+          else
+            schedule=$(printf "%s," "${schedules[@]}" | sed s/,$//)
+            echo "schedule=$schedule" | tee -a "$GITHUB_OUTPUT"
           fi
+
+      - name: Show schedule
+        run: |
+          echo "schedule: ${{ steps.verify-inputs.outputs.schedule }}" >> "$GITHUB_STEP_SUMMARY"
