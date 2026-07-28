@@ -74,8 +74,7 @@ jobs:
       - name: Append JSONL to file
         env:
           SCHEDULE: ${{ steps.verify-inputs.outputs.schedule }}
-        run: |
-          python3 ../.github/workflows/scripts/schedule_matchkeys.py -l info
+        run: python3 .github/workflows/scripts/schedule_matchkeys.py -l info
 
       - name: List file
         run: ls -l .
