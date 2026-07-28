@@ -67,7 +67,7 @@ jobs:
             echo "schedule=$schedule" | tee -a "$GITHUB_OUTPUT"
           fi
 
-      - name: Show schedule
+      - name: Show schedule summary
         run: |
           echo "schedule: ${{ steps.verify-inputs.outputs.schedule }}" >> "$GITHUB_STEP_SUMMARY"
 
@@ -76,5 +76,5 @@ jobs:
           SCHEDULE: ${{ steps.verify-inputs.outputs.schedule }}
         run: python3 .github/workflows/scripts/schedule_matchkeys.py -l info
 
-      - name: List file
-        run: ls -l .
+      - name: Show recent schedule
+        run: tail -5 js/schedule-matchkeys.jsonl
