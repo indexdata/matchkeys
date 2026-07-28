@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 import sys
 
-SCRIPT_VERSION = "1.0.0"
+SCRIPT_VERSION = "1.0.1"
 
 LOGLEVELS = {
     "debug": logging.DEBUG,
@@ -68,6 +68,7 @@ def append_schedule(schedule, schedule_pn):
     json_packet["scheduleDate"] = (
         datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     )
+    json_packet["deployment"] = schedule
     with open(schedule_pn, mode="a", encoding="utf-8") as output_fh:
         output_fh.write(json.dumps(json_packet, sort_keys=False, indent=None))
         output_fh.write("\n")
