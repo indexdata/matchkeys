@@ -18,6 +18,10 @@ on:
       - '**.js'
       - '**.json'
       - '.prettierrc'
+
+permissions:
+  contents: read
+
 jobs:
   prettier-check:
     runs-on: ubuntu-latest
@@ -28,15 +32,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+
       - name: Show documentation
         run: |
           echo "Documentation: ${{ env.documentation }}" | tee -a "$GITHUB_STEP_SUMMARY"
+
       - name: Do setup-node
         uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODEJS_VERSION }}
           check-latest: true
+
       - name: Do npm install
         run: npm install
+
       - name: Do prettier-check
         run: npm run prettier-check

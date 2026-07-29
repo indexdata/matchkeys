@@ -10,6 +10,10 @@ on:
         description: 'List of matchkeys with short commit hash SHA e.g. goldrush2024:1163910,isxn:d88522c'
         required: true
         type: string
+
+permissions:
+  contents: read
+
 jobs:
   schedule-deployment:
     runs-on: ubuntu-latest

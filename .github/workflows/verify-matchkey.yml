@@ -4,9 +4,6 @@ env:
   documentation: 'https://github.com/indexdata/matchkeys/blob/main/js/README.md#conduct-tests'
   NODEJS_VERSION: '22'
 
-permissions:
-  contents: read
-
 on:
   push:
     paths:
@@ -20,6 +17,10 @@ on:
       - '**.mjs'
       - '**.js'
       - 'js/test/**.json'
+
+permissions:
+  contents: read
+
 jobs:
   verify-matchkey:
     runs-on: ubuntu-latest
