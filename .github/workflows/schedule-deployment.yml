@@ -11,9 +11,6 @@ on:
         required: true
         type: string
 
-permissions:
-  contents: read
-
 jobs:
   schedule-deployment:
     runs-on: ubuntu-latest
