@@ -28,6 +28,8 @@ Matchkeys utilise some specific elements from MARC bibliographic records to gene
 
 The various matchkeys implementations are explained at [js/matchkeys](matchkeys).
 
+Refer also to Reservoir operations documentation about [server configuration](https://github.com/indexdata/reservoir/blob/master/docs/ops/configure.md) of Matchkeys.
+
 ## Transformers
 
 A basic example transformer is provided at [transformers](transformers) which
