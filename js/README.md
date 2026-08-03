@@ -125,7 +125,8 @@ See notes to [Configure your editor](https://dev.folio.org/faqs/how-to-use-edito
 
 ### Verify matchkeys development
 
-Do 'npm install' to install and configure ESLint and Prettier.
+Do 'npm install' to install and configure [Biome](https://biomejs.dev).
+Our configuration is deliberately minimal, but is sufficient to ensure consistency.
 
 See all available scripts listed in the [package.json](package.json) file.
 
@@ -133,33 +134,26 @@ Prior to commit, do the following steps.
 
 Note that [Workflow Actions](#github-workflows-actions) will conduct the checks on changes to relevant files.
 
-#### prettier
+#### biome-check
 
-See if any files need to be re-formatted:
-
-```
-npm run prettier-check
-```
-
-If so then do re-format:
+Biome will investigate all relevant files, and will report its findings and explanations.
 
 ```
-npm run prettier
+npm run biome-check
 ```
 
-#### lint
+#### biome-check-write
 
-Then assess code quality with ESLint:
-
-```
-npm run lint
-```
-
-If rules are contravened (see rule explanations at [ESLint](https://eslint.org/docs/latest/rules/) and [eslint-plugin-import](https://github.com/import-js/eslint-plugin-import)) then manually fix them.
-If any are highlighted as automatically fixable, then can do:
+By default this will apply all fixes, except those that Biome deems to be "unsafe" to apply automatically.
 
 ```
-npm run lint -- --fix
+npm run biome-check-write
+```
+
+If you are happy to let Biome apply the other fixes, then do this. Otherwise manually apply its suggestions.
+
+```
+npm run biome-check-write -- --unsafe
 ```
 
 #### Conduct tests

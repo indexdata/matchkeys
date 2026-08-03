@@ -6,6 +6,8 @@
     "lint": "eslint . --ext js,mjs",
     "prettier-check": "prettier . --check",
     "prettier": "prettier . --write",
+    "biome-check": "biome check --max-diagnostics none",
+    "biome-check-write": "biome check --max-diagnostics none --write",
     "test-deepdish": "node test/deepdish.mjs",
     "test-goldrush2024": "node test/goldrush2024.mjs",
     "test-goldrush2021": "node test/goldrush2021.mjs",
