@@ -396,7 +396,7 @@ export function matchkey(record) {
       getField(marcObj, '245', 'a'),
       getField(marcObj, '245', 'b'),
       getField(marcObj, '245', 'p'),
-    ])
+    ]),
   );
   keyStr += addComponent(doGMD(getField(marcObj, '245', 'h')));
   keyStr += addComponent(
@@ -404,12 +404,12 @@ export function matchkey(record) {
       getField(marcObj, '008'),
       getField(marcObj, '264', 'c'),
       getField(marcObj, '260', 'c'),
-    ])
+    ]),
   );
   keyStr += addComponent(doPagination(getField(marcObj, '300', 'a')));
   keyStr += addComponent(doEditionStatement(getField(marcObj, '250', 'a')));
   keyStr += addComponent(
-    doPublisherName([getField(marcObj, '264', 'b'), getField(marcObj, '260', 'b')])
+    doPublisherName([getField(marcObj, '264', 'b'), getField(marcObj, '260', 'b')]),
   );
   keyStr += addComponent(doTypeOfRecord(marcObj.leader));
   keyStr += addComponent(doTitlePart(getMultiSubfields(marcObj, '245', 'p')));
@@ -419,7 +419,7 @@ export function matchkey(record) {
       getField(marcObj, '100', 'a'),
       getField(marcObj, '110', 'a'),
       getField(marcObj, '111', 'a'),
-    ])
+    ]),
   );
   keyStr += addComponent(doInclusiveDates(getField(marcObj, '245', 'f')));
   keyStr += addComponent(doGDCN(getField(marcObj, '086', 'a')));
