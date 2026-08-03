@@ -43,7 +43,7 @@
   "javascript": {
     "formatter": {
       "quoteProperties": "asNeeded",
-      "trailingCommas": "es5",
+      "trailingCommas": "all",
       "semicolons": "always",
       "arrowParentheses": "always",
       "quoteStyle": "single"
