@@ -4,10 +4,13 @@ updates:
 
   # GitHub Workflows
   - package-ecosystem: "github-actions"
-    directory: "/"
+    directory: "/.github/workflows"
     schedule:
       interval: "cron"
-      cronjob: "12 01 * * MON"
+#      cronjob: "12 01 * * MON"
+      cronjob: "58 06 * * MON"
+    cooldown:
+      default-days: 5
     commit-message:
       prefix: "ci"
       include: "scope"
@@ -18,17 +21,14 @@ updates:
     directory: "/js"
     schedule:
       interval: "cron"
-      cronjob: "38 01 * * MON"
+#      cronjob: "38 01 * * MON"
+      cronjob: "04 07 * * MON"
     cooldown:
-      default-days: 7
+      default-days: 5
       semver-major-days: 30
     commit-message:
       prefix: "update"
       include: scope
-    ignore:
-      - dependency-name: "eslint"
-        update-types:
-          - "version-update:semver-major"
     labels: ["deps"]
     groups:
       all:
