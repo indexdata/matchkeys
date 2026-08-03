@@ -15,7 +15,7 @@ function loadMarcJson(record) {
 }
 
 function getRelevantSubFields(record, tag, sf) {
-  let data = [];
+  const data = [];
   const fields = record.fields.filter((f) => f[tag]);
   for (let x = 0; x < fields.length; x += 1) {
     const f = fields[x];
@@ -43,14 +43,14 @@ function getRelevantSubFields(record, tag, sf) {
 export function matchkey(record) {
   const marcObj = loadMarcJson(record);
 
-  let isbn = getRelevantSubFields(marcObj, '020', 'a');
+  const isbn = getRelevantSubFields(marcObj, '020', 'a');
   if (isbn) {
     for (let n = 0; n < isbn.length; n += 1) {
       isbn[n] = isbn[n].replace(/[^0-9Xx]/g, '').toUpperCase();
     }
     return isbn;
   }
-  let issn = getRelevantSubFields(marcObj, '022', 'a');
+  const issn = getRelevantSubFields(marcObj, '022', 'a');
   if (issn) {
     for (let n = 0; n < issn.length; n += 1) {
       issn[n] = issn[n].replace(/[^0-9Xx]/g, '').toUpperCase();

@@ -1,8 +1,7 @@
-name: prettier-check
+name: biome-check
 
 env:
   documentation: 'https://github.com/indexdata/matchkeys/blob/main/js/README.md#verify-matchkeys-development'
-  NODEJS_VERSION: '22'
 
 on:
   workflow_dispatch:
@@ -11,40 +10,38 @@ on:
       - '**.mjs'
       - '**.js'
       - '**.json'
-      - '.prettierrc'
   pull_request:
     paths:
       - '**.mjs'
       - '**.js'
       - '**.json'
-      - '.prettierrc'
 
 permissions:
   contents: read
 
 jobs:
-  prettier-check:
+  biome-check:
     runs-on: ubuntu-latest
     defaults:
       run:
-        shell: bash
         working-directory: ./js
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Show documentation
         run: |
           echo "Documentation: ${{ env.documentation }}" | tee -a "$GITHUB_STEP_SUMMARY"
 
-      - name: Do setup-node
-        uses: actions/setup-node@v7
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
         with:
-          node-version: ${{ env.NODEJS_VERSION }}
-          check-latest: true
+          working-dir: 'js'
 
-      - name: Do npm install
-        run: npm install
+      - name: Show biome version
+        run: biome version
 
-      - name: Do prettier-check
-        run: npm run prettier-check
+      - name: Run Biome
+        run: biome ci --error-on-warnings .

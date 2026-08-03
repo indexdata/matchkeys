@@ -2,10 +2,8 @@
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
-    "eslint-config-print": "eslint --print-config eslint.config.js",
-    "lint": "eslint . --ext js,mjs",
-    "prettier-check": "prettier . --check",
-    "prettier": "prettier . --write",
+    "biome-check": "biome check --error-on-warnings --max-diagnostics none",
+    "biome-check-write": "biome check --max-diagnostics none --write",
     "test-deepdish": "node test/deepdish.mjs",
     "test-goldrush2024": "node test/goldrush2024.mjs",
     "test-goldrush2021": "node test/goldrush2021.mjs",
@@ -16,10 +14,7 @@
     "test-shareWorks": "node test/shareWorks.mjs"
   },
   "devDependencies": {
-    "eslint": "^9.39.5",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
-    "globals": "^17.8.0",
-    "prettier": "^3.9.5"
+    "@biomejs/biome": "=2.5.6",
+    "globals": "^17.8.0"
   }
 }

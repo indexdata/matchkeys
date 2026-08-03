@@ -1,0 +1,68 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.6/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true,
+    "root": "../",
+    "defaultBranch": "main"
+  },
+  "files": { "ignoreUnknown": false },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 100,
+    "attributePosition": "auto",
+    "bracketSpacing": true,
+    "expand": "auto",
+    "includes": [
+      "**",
+      "!**/README.md",
+      "!test/assertions-*.json",
+      "!test/records/invalid-1-broken-json.json",
+      "!test/records/vde/invalid-1-broken-json.json",
+      "!transformers/marc-transformer.mjs"
+    ]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended"
+    },
+    "includes": [
+      "**",
+      "!**/README.md",
+      "!test/records/invalid-1-broken-json.json",
+      "!test/records/vde/invalid-1-broken-json.json",
+      "!transformers/marc-transformer.mjs"
+    ]
+  },
+  "javascript": {
+    "formatter": {
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "all",
+      "semicolons": "always",
+      "arrowParentheses": "always",
+      "quoteStyle": "single"
+    },
+    "parser": {
+      "jsxEverywhere": false
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    },
+    "includes": [
+      "**",
+      "!test/records/invalid-1-broken-json.json",
+      "!test/records/vde/invalid-1-broken-json.json"
+    ]
+  }
+}

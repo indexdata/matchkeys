@@ -2,7 +2,9 @@
 
 ## Table of contents
 
-<!-- okapi/doc/md2toc -l 2 -h 4 README.md -->
+<!-- $GH_FOLIO/okapi/doc/md2toc -l 2 -h 4 README.md -->
+* [Matchkeys](#matchkeys)
+* [Table of contents](#table-of-contents)
 * [Matchkeys](#matchkeys)
 * [Transformers](#transformers)
     * [999 subfield definitions](#999-subfield-definitions)
@@ -14,13 +16,12 @@
     * [Overview](#overview)
     * [editorconfig](#editorconfig)
     * [Verify matchkeys development](#verify-matchkeys-development)
-        * [prettier](#prettier)
-        * [lint](#lint)
+        * [biome-check](#biome-check)
+        * [biome-check-write](#biome-check-write)
         * [Conduct tests](#conduct-tests)
 * [GitHub Workflows Actions](#github-workflows-actions)
-    * [prettier-check](#prettier-check)
-    * [eslint](#eslint)
-    * [verify-matchkey](#verify-matchkey)
+    * [Workflow biome-check](#workflow-biome-check)
+    * [Workflow verify-matchkey](#workflow-verify-matchkey)
 
 ## Matchkeys
 
@@ -125,41 +126,37 @@ See notes to [Configure your editor](https://dev.folio.org/faqs/how-to-use-edito
 
 ### Verify matchkeys development
 
-Do 'npm install' to install and configure ESLint and Prettier.
+Do 'npm install' to install and configure [Biome](https://biomejs.dev).
+Our configuration is deliberately minimal, but is sufficient to ensure consistency.
 
 See all available scripts listed in the [package.json](package.json) file.
 
 Prior to commit, do the following steps.
 
-Note that [Workflow Actions](#github-workflows-actions) will conduct the checks on changes to relevant files.
+(Note that [Workflow Actions](#github-workflows-actions) (explained below) will conduct the checks on changes to relevant files.)
 
-#### prettier
+#### biome-check
 
-See if any files need to be re-formatted:
+Biome will investigate all relevant files, and will report its findings and explanations.
 
-```
-npm run prettier-check
-```
-
-If so then do re-format:
+The Biome configuration is deliberately minimal, but still assists to maintain consistent JavaScript code.
 
 ```
-npm run prettier
+npm run biome-check
 ```
 
-#### lint
+#### biome-check-write
 
-Then assess code quality with ESLint:
-
-```
-npm run lint
-```
-
-If rules are contravened (see rule explanations at [ESLint](https://eslint.org/docs/latest/rules/) and [eslint-plugin-import](https://github.com/import-js/eslint-plugin-import)) then manually fix them.
-If any are highlighted as automatically fixable, then can do:
+By default this will apply all fixes, except those that Biome deems to be "unsafe" to apply automatically.
 
 ```
-npm run lint -- --fix
+npm run biome-check-write
+```
+
+If you are happy to let Biome apply the other fixes, then do this. Otherwise manually apply its suggestions.
+
+```
+npm run biome-check-write -- --unsafe
 ```
 
 #### Conduct tests
@@ -179,23 +176,17 @@ npm run test-goldrush2024
 
 There is a set of [Workflow Actions](https://github.com/indexdata/matchkeys/actions) for development and deployment.
 
-### prettier-check
+### Workflow biome-check
 
-The [prettier-check](https://github.com/indexdata/matchkeys/actions/workflows/prettier-check.yml) Workflow will be triggered by any modification to JavaScript and JSON files.
+The [biome-check](https://github.com/indexdata/matchkeys/actions/workflows/biome-check.yml) Workflow will be triggered by any modification to JavaScript and JSON files.
 
-See documentation above for the pre-commit [prettier](#prettier) checks and fixes.
+See documentation above for the pre-commit local [biome-check](#biome-check) checks and fixes.
 
-### eslint
-
-The [eslint](https://github.com/indexdata/matchkeys/actions/workflows/eslint.yml) Workflow will be triggered by any modification to JavaScript files or changes to the [package.json](package.json) file.
-
-See documentation above for the pre-commit [lint](#lint) checks and fixes.
-
-### verify-matchkey
+### Workflow verify-matchkey
 
 The [verify-matchkey](https://github.com/indexdata/matchkeys/actions/workflows/verify-matchkey.yml) Workflow will be triggered by any modification to JavaScript files or JSON files.
 
-See documentation above for the pre-commit [Conduct tests](#conduct-tests) facilities.
+See documentation above for the local pre-commit [Conduct tests](#conduct-tests) facilities.
 
 The Workflow will discover the changed files and will run the test for each associated matchkey.
 

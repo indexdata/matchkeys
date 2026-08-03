@@ -14,7 +14,7 @@ from pathlib import Path
 import re
 import sys
 
-SCRIPT_VERSION = "1.1.0"
+SCRIPT_VERSION = "1.1.1"
 
 LOGLEVELS = {
     "debug": logging.DEBUG,
@@ -142,6 +142,9 @@ def main():
         if input_fn == "js/test/assertions-deepdish-goldrush2024.json":
             matchkeys.add("deepdish")
             matchkeys.discard("deepdish-goldrush2024")
+        if input_fn == "js/matchkeys/goldrush/goldrush.mjs":
+            matchkeys.add("goldrush2021")
+            matchkeys.discard("goldrush")
         # Detect changed related assertions records.
         for matchkey in detect_matchkey_for_record(matchkeys_records, input_fn):
             matchkeys.add(matchkey)
