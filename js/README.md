@@ -2,7 +2,9 @@
 
 ## Table of contents
 
-<!-- okapi/doc/md2toc -l 2 -h 4 README.md -->
+<!-- $GH_FOLIO/okapi/doc/md2toc -l 2 -h 4 README.md -->
+* [Matchkeys](#matchkeys)
+* [Table of contents](#table-of-contents)
 * [Matchkeys](#matchkeys)
 * [Transformers](#transformers)
     * [999 subfield definitions](#999-subfield-definitions)
@@ -14,13 +16,12 @@
     * [Overview](#overview)
     * [editorconfig](#editorconfig)
     * [Verify matchkeys development](#verify-matchkeys-development)
-        * [prettier](#prettier)
-        * [lint](#lint)
+        * [biome-check](#biome-check)
+        * [biome-check-write](#biome-check-write)
         * [Conduct tests](#conduct-tests)
 * [GitHub Workflows Actions](#github-workflows-actions)
-    * [prettier-check](#prettier-check)
-    * [eslint](#eslint)
-    * [verify-matchkey](#verify-matchkey)
+    * [Workflow biome-check](#workflow-biome-check)
+    * [Workflow verify-matchkey](#workflow-verify-matchkey)
 
 ## Matchkeys
 
@@ -132,11 +133,13 @@ See all available scripts listed in the [package.json](package.json) file.
 
 Prior to commit, do the following steps.
 
-Note that [Workflow Actions](#github-workflows-actions) will conduct the checks on changes to relevant files.
+(Note that [Workflow Actions](#github-workflows-actions) (explained below) will conduct the checks on changes to relevant files.)
 
 #### biome-check
 
 Biome will investigate all relevant files, and will report its findings and explanations.
+
+The Biome configuration is deliberately minimal, but still assists to maintain consistent JavaScript code.
 
 ```
 npm run biome-check
@@ -173,23 +176,17 @@ npm run test-goldrush2024
 
 There is a set of [Workflow Actions](https://github.com/indexdata/matchkeys/actions) for development and deployment.
 
-### prettier-check
+### Workflow biome-check
 
-The [prettier-check](https://github.com/indexdata/matchkeys/actions/workflows/prettier-check.yml) Workflow will be triggered by any modification to JavaScript and JSON files.
+The [biome-check](https://github.com/indexdata/matchkeys/actions/workflows/prettier-check.yml) Workflow will be triggered by any modification to JavaScript and JSON files.
 
-See documentation above for the pre-commit [prettier](#prettier) checks and fixes.
+See documentation above for the pre-commit local [biome-check](#biome-check) checks and fixes.
 
-### eslint
-
-The [eslint](https://github.com/indexdata/matchkeys/actions/workflows/eslint.yml) Workflow will be triggered by any modification to JavaScript files or changes to the [package.json](package.json) file.
-
-See documentation above for the pre-commit [lint](#lint) checks and fixes.
-
-### verify-matchkey
+### Workflow verify-matchkey
 
 The [verify-matchkey](https://github.com/indexdata/matchkeys/actions/workflows/verify-matchkey.yml) Workflow will be triggered by any modification to JavaScript files or JSON files.
 
-See documentation above for the pre-commit [Conduct tests](#conduct-tests) facilities.
+See documentation above for the local pre-commit [Conduct tests](#conduct-tests) facilities.
 
 The Workflow will discover the changed files and will run the test for each associated matchkey.
 
