@@ -2,10 +2,6 @@
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
-    "eslint-config-print": "eslint --print-config eslint.config.js",
-    "lint": "eslint . --ext js,mjs",
-    "prettier-check": "prettier . --check",
-    "prettier": "prettier . --write",
     "biome-check": "biome check --error-on-warnings --max-diagnostics none",
     "biome-check-write": "biome check --max-diagnostics none --write",
     "test-deepdish": "node test/deepdish.mjs",
@@ -19,10 +15,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "=2.5.5",
-    "eslint": "^9.39.5",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
-    "globals": "^17.8.0",
-    "prettier": "^3.9.5"
+    "globals": "^17.8.0"
   }
 }
