@@ -2,7 +2,7 @@ name: verify-matchkey
 
 env:
   documentation: 'https://github.com/indexdata/matchkeys/blob/main/js/README.md#conduct-tests'
-  NODEJS_VERSION: '22'
+  NODEJS_VERSION: '24'
 
 on:
   push:
