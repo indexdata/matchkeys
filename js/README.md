@@ -178,7 +178,7 @@ There is a set of [Workflow Actions](https://github.com/indexdata/matchkeys/acti
 
 ### Workflow biome-check
 
-The [biome-check](https://github.com/indexdata/matchkeys/actions/workflows/prettier-check.yml) Workflow will be triggered by any modification to JavaScript and JSON files.
+The [biome-check](https://github.com/indexdata/matchkeys/actions/workflows/biome-check.yml) Workflow will be triggered by any modification to JavaScript and JSON files.
 
 See documentation above for the pre-commit local [biome-check](#biome-check) checks and fixes.
 
