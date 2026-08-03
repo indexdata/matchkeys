@@ -8,6 +8,8 @@ updates:
     schedule:
       interval: "cron"
       cronjob: "12 01 * * MON"
+    cooldown:
+      default-days: 5
     commit-message:
       prefix: "ci"
       include: "scope"
@@ -20,7 +22,7 @@ updates:
       interval: "cron"
       cronjob: "38 01 * * MON"
     cooldown:
-      default-days: 7
+      default-days: 5
       semver-major-days: 30
     commit-message:
       prefix: "update"
