@@ -16,6 +16,7 @@
     "test-shareWorks": "node test/shareWorks.mjs"
   },
   "devDependencies": {
+    "@biomejs/biome": "=2.5.5",
     "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
