@@ -7,8 +7,7 @@ updates:
     directory: "/.github/workflows"
     schedule:
       interval: "cron"
-#      cronjob: "12 01 * * MON"
-      cronjob: "58 06 * * MON"
+      cronjob: "12 01 * * MON"
     cooldown:
       default-days: 5
     commit-message:
@@ -21,8 +20,8 @@ updates:
     directory: "/js"
     schedule:
       interval: "cron"
-#      cronjob: "38 01 * * MON"
-      cronjob: "04 07 * * MON"
+      cronjob: "38 01 * * MON"
+    cronjob: "04 07 * * MON"
     cooldown:
       default-days: 5
       semver-major-days: 30
