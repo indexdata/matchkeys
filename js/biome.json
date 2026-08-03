@@ -47,6 +47,9 @@
       "semicolons": "always",
       "arrowParentheses": "always",
       "quoteStyle": "single"
+    },
+    "parser": {
+      "jsxEverywhere": false
     }
   },
   "assist": {
