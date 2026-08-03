@@ -6,17 +6,15 @@ env:
 on:
   workflow_dispatch:
   push:
-    branches: [ DEVOPS-8282-biome-2 ]
-#  push:
-#    paths:
-#      - '**.mjs'
-#      - '**.js'
-#      - '**.json'
-#  pull_request:
-#    paths:
-#      - '**.mjs'
-#      - '**.js'
-#      - '**.json'
+    paths:
+      - '**.mjs'
+      - '**.js'
+      - '**.json'
+  pull_request:
+    paths:
+      - '**.mjs'
+      - '**.js'
+      - '**.json'
 
 permissions:
   contents: read
@@ -36,3 +34,14 @@ jobs:
       - name: Show documentation
         run: |
           echo "Documentation: ${{ env.documentation }}" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
+        with:
+          working-dir: 'js'
+
+      - name: Show biome version
+        run: biome version
+
+      - name: Run Biome
+        run: biome ci --error-on-warnings .
