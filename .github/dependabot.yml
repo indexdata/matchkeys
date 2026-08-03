@@ -27,10 +27,6 @@ updates:
     commit-message:
       prefix: "update"
       include: scope
-    ignore:
-      - dependency-name: "eslint"
-        update-types:
-          - "version-update:semver-major"
     labels: ["deps"]
     groups:
       all:
