@@ -29,7 +29,7 @@ for (let n = 0; n < testFiles.length; n += 1) {
     const marcJson = JSON.parse(marcJsonStr);
     const payloadJson = { marc: marcJson };
     const payloadJsonStr = JSON.stringify(payloadJson);
-    let keyArr = matchkey(payloadJsonStr);
+    const keyArr = matchkey(payloadJsonStr);
     key = JSON.stringify(keyArr);
   } catch (e) {
     key = e.message;
@@ -57,7 +57,7 @@ for (let n = 0; n < testFiles2.length; n += 1) {
     const marcJson = JSON.parse(marcJsonStr);
     const payloadJson = { marc: marcJson };
     const payloadJsonStr = JSON.stringify(payloadJson);
-    let keyArr = matchkey(payloadJsonStr);
+    const keyArr = matchkey(payloadJsonStr);
     key = JSON.stringify(keyArr);
   } catch (e) {
     key = e.message;

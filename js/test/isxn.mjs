@@ -29,7 +29,7 @@ for (let n = 0; n < testFiles.length; n += 1) {
     const marcJson = JSON.parse(marcJsonStr);
     const payloadJson = { marc: marcJson };
     const payloadJsonStr = JSON.stringify(payloadJson);
-    let keyArr = matchkey(payloadJsonStr);
+    const keyArr = matchkey(payloadJsonStr);
     key = JSON.stringify(keyArr);
   } catch (e) {
     key = e.message;
@@ -41,7 +41,7 @@ for (let n = 0; n < testFiles.length; n += 1) {
   }
 }
 
-let isbn_term = {
+const isbn_term = {
   term: '978-3-16-148410-0',
   field: 'isbn',
 };
@@ -53,7 +53,7 @@ if (!assert(kayAr[0] === expected, `Should match:\n${expected}`)) {
   testsFailedNum += 1;
 }
 
-let issn_term = {
+const issn_term = {
   term: '1432-069X',
   field: 'issn',
 };

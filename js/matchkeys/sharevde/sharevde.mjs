@@ -15,7 +15,7 @@ function loadMarcJson(record) {
 }
 
 function getRelevantSubFields(record, tag, sf) {
-  let data = [];
+  const data = [];
   const fields = record.fields.filter((f) => f[tag]);
   for (let x = 0; x < fields.length; x += 1) {
     const f = fields[x];

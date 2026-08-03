@@ -422,7 +422,7 @@ function doStandardNum(snum) {
  */
 export function matchkey(record) {
   let keyStr = '';
-  let out = [];
+  const out = [];
   const marcObj = loadMarcJson(record);
   keyStr += addComponent(
     doTitle([
@@ -460,7 +460,7 @@ export function matchkey(record) {
   keyStr += addComponent(doInclusiveDates(getRelevantSubField(marcObj, '245', 'f')));
   keyStr += addComponent(doGDCN(getRelevantSubField(marcObj, '086', 'a')));
   keyStr += addComponent(doElectronicIndicator(marcObj));
-  let grStr = keyStr.toLowerCase();
+  const grStr = keyStr.toLowerCase();
   out.push(grStr);
 
   // do identifiers matchkey here
@@ -471,8 +471,8 @@ export function matchkey(record) {
     nums = nums.sort();
     let prevKey = '';
     for (let y = 0; y < nums.length; y++) {
-      let snum = { tag: tag, num: nums[y] };
-      let keyStr = doStandardNum(snum);
+      const snum = { tag: tag, num: nums[y] };
+      const keyStr = doStandardNum(snum);
       if (keyStr !== prevKey) {
         if (keyStr) out.push(keyStr.toLowerCase());
         prevKey = keyStr;
