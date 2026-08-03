@@ -1,0 +1,38 @@
+name: biome-check
+
+env:
+  documentation: 'https://github.com/indexdata/matchkeys/blob/main/js/README.md#verify-matchkeys-development'
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ DEVOPS-8282-biome-2 ]
+#  push:
+#    paths:
+#      - '**.mjs'
+#      - '**.js'
+#      - '**.json'
+#  pull_request:
+#    paths:
+#      - '**.mjs'
+#      - '**.js'
+#      - '**.json'
+
+permissions:
+  contents: read
+
+jobs:
+  biome-check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./js
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Show documentation
+        run: |
+          echo "Documentation: ${{ env.documentation }}" | tee -a "$GITHUB_STEP_SUMMARY"
