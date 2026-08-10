@@ -64,7 +64,7 @@ jobs:
               continue
             fi
             echo "branch=${branch}"
-            schedules+=("${matchkey}:${sha}:${branch}")
+            schedules+=("${matchkey}:${sha}")
           done
           if [ ${#errors[@]} -gt 0 ]; then
             printf "ERROR: %s\n" "${errors[@]}"
