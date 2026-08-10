@@ -4,8 +4,6 @@
 
 <!-- $GH_FOLIO/okapi/doc/md2toc -l 2 -h 4 README.md -->
 * [Matchkeys](#matchkeys)
-* [Table of contents](#table-of-contents)
-* [Matchkeys](#matchkeys)
 * [Transformers](#transformers)
     * [999 subfield definitions](#999-subfield-definitions)
         * [999 10 (source holdings record)](#999-10-source-holdings-record)
@@ -22,6 +20,7 @@
 * [GitHub Workflows Actions](#github-workflows-actions)
     * [Workflow biome-check](#workflow-biome-check)
     * [Workflow verify-matchkey](#workflow-verify-matchkey)
+    * [Workflow schedule-deployment](#workflow-schedule-deployment)
 
 ## Matchkeys
 
@@ -191,3 +190,19 @@ See documentation above for the local pre-commit [Conduct tests](#conduct-tests)
 The Workflow will discover the changed files and will run the test for each associated matchkey.
 
 Note that there is currently a tiny glitch with this workflow. The first git push for a branch will fail, but subsequent pushes will operate properly. There is a workaround to push an initial branch with no modifications, then push subsequent changes.
+
+### Workflow schedule-deployment
+
+The [schedule-deployment](https://github.com/indexdata/matchkeys/actions/workflows/schedule-deployment.yml) Workflow adds an entry to the [schedule-matchkeys.jsonl](schedule-matchkeys.jsonl) file.
+
+Other back-room processes will conduct the deployment of the matchkeys and the pool.
+
+When a matchkey is ready (whether it is still on a feature branch or already merged to mainline) then create a new git branch for preparation of this schedule entry. Select the Workflow and trigger a run via the workflow_dispatch event (i.e. select `Run workflow` on the right-hand side).
+
+Specify the new branch (note that `main` branch is not allowed).
+
+For each matchkey that is to form the pool, specify its matchkey name and the relevant git commit as a short (or long) commit hash SHA. This is a comma-separated list of matchkeys.
+
+For example `goldrush2024:1163910,isxn:d88522c`
+
+Raise a pull-request to target mainline.
