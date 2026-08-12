@@ -6,8 +6,16 @@ env:
 on:
   workflow_dispatch:
     inputs:
+      action:
+        description: 'Deployment action'
+        required: true
+        default: 'add'
+        type: choice
+        options:
+          - 'add'
+          - 'remove'
       deployments:
-        description: 'List of matchkeys with short commit hash SHA e.g. goldrush2024:1163910,isxn:d88522c'
+        description: 'List of matchkeys with commit hash SHA e.g. goldrush2024:1163910,isxn:d88522c'
         required: true
         type: string
 
@@ -76,10 +84,11 @@ jobs:
 
       - name: Show schedule summary
         run: |
-          echo "schedule: ${{ steps.verify-inputs.outputs.schedule }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "schedule: ${{ inputs.action }}: ${{ steps.verify-inputs.outputs.schedule }}" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Append JSONL to file
         env:
+          ACTION: ${{ inputs.action }}
           SCHEDULE: ${{ steps.verify-inputs.outputs.schedule }}
           JOB_ID: ${{ github.run_number }}
         run: python3 .github/workflows/scripts/schedule_matchkeys.py -l info

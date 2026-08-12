@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 import sys
 
-SCRIPT_VERSION = "1.0.2"
+SCRIPT_VERSION = "1.1.0"
 
 LOGLEVELS = {
     "debug": logging.DEBUG,
@@ -50,6 +50,11 @@ def get_options():
         LOGGER.setLevel(loglevel)
     LOGGER.info("Using script version: %s", SCRIPT_VERSION)
     try:
+        action = os.environ["ACTION"]
+    except KeyError:
+        LOGGER.error("Missing env: ACTION")
+        options_okay = False
+    try:
         schedule = os.environ["SCHEDULE"]
     except KeyError:
         LOGGER.error("Missing env: SCHEDULE")
@@ -62,10 +67,10 @@ def get_options():
     schedule_pn = PROG_PATH.parent.parent.parent.joinpath("js/schedule-matchkeys.jsonl")
     if not options_okay:
         sys.exit(2)
-    return int(job_id), schedule, schedule_pn
+    return int(job_id), action, schedule, schedule_pn
 
 
-def append_schedule(job_id, schedule, schedule_pn):
+def append_schedule(job_id, action, schedule, schedule_pn):
     """
     Composes the JSONL and appends to file.
     """
@@ -74,6 +79,7 @@ def append_schedule(job_id, schedule, schedule_pn):
     json_packet["scheduleDate"] = (
         datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     )
+    json_packet["action"] = action
     json_packet["deployment"] = schedule
     with open(schedule_pn, mode="a", encoding="utf-8") as output_fh:
         output_fh.write(json.dumps(json_packet, sort_keys=False, indent=None))
@@ -84,9 +90,9 @@ def main():
     """
     Append the schedule JSONL to schedule-matchkeys.jsonl file.
     """
-    job_id, schedule, schedule_pn = get_options()
+    job_id, action, schedule, schedule_pn = get_options()
     LOGGER.debug("schedule=%s schedule_pn=%s", schedule, schedule_pn)
-    append_schedule(job_id, schedule, schedule_pn)
+    append_schedule(job_id, action, schedule, schedule_pn)
 
 
 if __name__ == "__main__":

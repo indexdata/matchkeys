@@ -205,4 +205,6 @@ For each matchkey that is to form the pool, specify its matchkey name and the re
 
 For example `goldrush2024:1163910,isxn:d88522c`
 
+Specify the `action` "add or remove".
+
 Raise a pull-request to target mainline.
