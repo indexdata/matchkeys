@@ -118,6 +118,9 @@ For each matchkey there is an entry in the [js/package.json](package.json) file 
 
 To add a new matchkey, follow the structure of an existing matchkey.
 
+> [!IMPORTANT]
+> The matchkey names are restricted to alpha-numeric or hyphen (dash) characters.
+
 ### editorconfig
 
 There is a [.editorconfig](../.editorconfig) file at the top-level of this repository.
