@@ -14,7 +14,7 @@ from pathlib import Path
 import re
 import sys
 
-SCRIPT_VERSION = "1.1.1"
+SCRIPT_VERSION = "1.2.0"
 
 LOGLEVELS = {
     "debug": logging.DEBUG,
@@ -148,7 +148,11 @@ def main():
         # Detect changed related assertions records.
         for matchkey in detect_matchkey_for_record(matchkeys_records, input_fn):
             matchkeys.add(matchkey)
-
+    for matchkey in matchkeys:
+        dir_matchkey = Path(f"matchkeys/{matchkey}")
+        if not dir_matchkey.exists():
+            LOGGER.error("The matchkey '%s' does not exist.", matchkey)
+            sys.exit(1)
     LOGGER.info("Determined %s matchkeys.", len(matchkeys))
     print(" ".join(matchkeys))
 
