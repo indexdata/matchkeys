@@ -14,7 +14,7 @@ from pathlib import Path
 import re
 import sys
 
-SCRIPT_VERSION = "1.2.0"
+SCRIPT_VERSION = "1.2.1"
 
 LOGLEVELS = {
     "debug": logging.DEBUG,
@@ -125,6 +125,8 @@ def main():
     matchkey_src_re = r"^js/matchkeys/([^/]+)/.+\.mjs$"
     test_src_re = r"^js/test/([^.]+)\.mjs$"
     test_assertion_re = r"js/test/assertions-([^\.]+)\.json$"
+    matchkey_name_re = r"^[0-9a-zA-Z-]+$"
+    matchkey_errors = False
     matchkeys_records = gather_matchkeys_test_records()
     # pprint.pprint(matchkeys_records)
     matchkeys = set()
@@ -149,10 +151,21 @@ def main():
         for matchkey in detect_matchkey_for_record(matchkeys_records, input_fn):
             matchkeys.add(matchkey)
     for matchkey in matchkeys:
+        match = re.search(matchkey_name_re, matchkey)
+        if not match:
+            msg = (
+                f"matchkey '{matchkey}': "
+                "The matchkey names are restricted to alpha-numeric "
+                "or hyphen (dash) characters."
+            )
+            LOGGER.error(msg)
+            matchkey_errors = True
         dir_matchkey = Path(f"matchkeys/{matchkey}")
         if not dir_matchkey.exists():
             LOGGER.error("The matchkey '%s' does not exist.", matchkey)
-            sys.exit(1)
+            matchkey_errors = True
+    if matchkey_errors:
+        sys.exit(1)
     LOGGER.info("Determined %s matchkeys.", len(matchkeys))
     print(" ".join(matchkeys))
 
