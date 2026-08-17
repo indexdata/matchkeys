@@ -15,7 +15,7 @@ on:
           - 'add'
           - 'remove'
       deployments:
-        description: 'List of matchkeys with commit hash SHA e.g. goldrush2024:1163910,isxn:d88522c'
+        description: 'List of matchkeys with commit hash SHA e.g. goldrush2024:1163910,isxn:e902d0a'
         required: true
         type: string
 
@@ -63,16 +63,17 @@ jobs:
             sha=$(echo "${deployment}" | cut -d ':' -f 2)
             echo "sha=${sha}"
             if [ -z "${sha}" ]; then
-              errors+=("The SHA is missing for matchkey '${matchkey}'.")
+              errors+=("The SHA declaration is missing for matchkey '${matchkey}'.")
               continue
             fi
-            branch=$(git name-rev --name-only "${sha}" 2>&1 | sed 's/[~^].*$//')
+            sha_short=$(echo "${sha}" | cut -c 1-7)
+            branch=$(git name-rev --name-only "${sha_short}" 2>&1 | sed 's/[~^].*$//')
             if [[ "${branch}" =~ .*"Could not get".* ]]; then
-              errors+=("Could not find SHA '${sha}' for matchkey '${matchkey}'.")
+              errors+=("Could not find SHA '${sha_short}' for matchkey '${matchkey}'.")
               continue
             fi
             echo "branch=${branch}"
-            schedules+=("${matchkey}:${sha}")
+            schedules+=("${matchkey}:${sha_short}")
           done
           if [ ${#errors[@]} -gt 0 ]; then
             printf "ERROR: %s\n" "${errors[@]}"

@@ -198,16 +198,14 @@ Note that there is currently a tiny glitch with this workflow. The first git pus
 
 The [schedule-deployment](https://github.com/indexdata/matchkeys/actions/workflows/schedule-deployment.yml) Workflow adds an entry to the [schedule-matchkeys.jsonl](schedule-matchkeys.jsonl) file.
 
-Other back-room processes will conduct the deployment of the matchkeys and the pool.
+Other back-room processes will conduct the deployment of the matchkeys and the pool, and will notify when the deployment is done.
 
-When a matchkey is ready (whether it is still on a feature branch or already merged to mainline) then create a new git branch for preparation of this schedule entry. Select the Workflow and trigger a run via the workflow_dispatch event (i.e. select `Run workflow` on the right-hand side).
+When a matchkey is ready, then select the Workflow and trigger a run via the workflow_dispatch event (i.e. select `Run workflow` on the right-hand side).
 
-Specify the new branch (note that `main` branch is not allowed).
+Specify the branch (note that `main` branch is not allowed).
 
-For each matchkey that is to form the pool, specify its matchkey name and the relevant git commit as a short (or long) commit hash SHA. This is a comma-separated list of matchkeys.
+For each matchkey that is to form the pool, specify its matchkey name and the relevant git commit as a short commit hash SHA. This is a comma-separated list of matchkeys.
 
-For example `goldrush2024:1163910,isxn:d88522c`
+For example `goldrush2024:1163910,isxn:e902d0a`
 
 Specify the `action` "add or remove".
-
-Raise a pull-request to target mainline.
