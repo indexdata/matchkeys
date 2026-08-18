@@ -1,6 +1,6 @@
-# Matchkeys - isxn
+# Matcher - malort
 
-The purpose of this matchkey is for clustering simply around isbn/issn and allow searching on them via SRU.
+The purpose of this matcher is to create single record clusters by returning an empty string.
 
 ## Configuration
 

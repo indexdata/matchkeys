@@ -1,6 +1,6 @@
-# Matchkeys - malort
+# Matcher - shareWorks 
 
-The purpose of this matchkey is to create single record clusters by returning an empty string.
+The purpose of this matcher is to create clusters based on Share-VDE's works identifiers from the 996$9 field.
 
 ## Configuration
 

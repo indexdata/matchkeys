@@ -1,5 +1,5 @@
-# Matchkeys for Reservoir
+# Matchers and other scripts for Reservoir
 
-The [Matchkeys](js/README.md#matchkeys) and [Transformers](js/README.md#transformers) are implemented as JavaScript modules.
+The [Matchers](js/README.md#matchers) and [Transformers](js/README.md#transformers) are implemented as JavaScript modules.
 
-Refer to documentation for [Development of matchkeys](js/README.md#development-of-matchkeys) and deployment facilities.
+Refer to documentation for [Development of matchers](js/README.md#development-of-matchers) and deployment facilities.

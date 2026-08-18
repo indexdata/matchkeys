@@ -1,7 +1,7 @@
 name: biome-check
 
 env:
-  documentation: 'https://github.com/indexdata/matchkeys/blob/main/js/README.md#verify-matchkeys-development'
+  documentation: 'https://github.com/indexdata/reservoir-scripts/blob/main/js/README.md#verify-matchers-development'
 
 on:
   workflow_dispatch:

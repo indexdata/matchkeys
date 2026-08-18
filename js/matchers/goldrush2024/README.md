@@ -1,4 +1,4 @@
-# Matchkeys - goldrush2024
+# Matcher - goldrush2024
 
 This implements the "Gold Rush - Colorado Alliance MARC record match key generation" (specification dated 4 December 2024 [wayback](https://web.archive.org/web/20260101094107/https://coalliance.org/faq-library-content-comparison-system)).
 

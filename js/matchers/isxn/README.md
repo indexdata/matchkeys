@@ -1,6 +1,6 @@
-# Matchkeys - shareWorks 
+# Matcher - isxn
 
-The purpose of this matchkey is to create clusters based on Share-VDE's works identifiers from the 996$9 field.
+The purpose of this matcher is for clustering simply around isbn/issn and allow searching on them via SRU.
 
 ## Configuration
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Append the schedule JSONL to schedule-matchkeys.jsonl file.
+Append the schedule JSONL to schedule-deployments.jsonl file.
 
 NOTE: Please use 'black' to re-format code.
 """
@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 import sys
 
-SCRIPT_VERSION = "1.1.0"
+SCRIPT_VERSION = "1.2.0"
 
 LOGLEVELS = {
     "debug": logging.DEBUG,
@@ -64,7 +64,9 @@ def get_options():
     except KeyError:
         LOGGER.error("Missing env: JOB_ID")
         options_okay = False
-    schedule_pn = PROG_PATH.parent.parent.parent.joinpath("js/schedule-matchkeys.jsonl")
+    schedule_pn = PROG_PATH.parent.parent.parent.joinpath(
+        "js/schedule-deployments.jsonl"
+    )
     if not options_okay:
         sys.exit(2)
     return int(job_id), action, schedule, schedule_pn
@@ -88,7 +90,7 @@ def append_schedule(job_id, action, schedule, schedule_pn):
 
 def main():
     """
-    Append the schedule JSONL to schedule-matchkeys.jsonl file.
+    Append the schedule JSONL to schedule-deployments.jsonl file.
     """
     job_id, action, schedule, schedule_pn = get_options()
     LOGGER.debug("schedule=%s schedule_pn=%s", schedule, schedule_pn)

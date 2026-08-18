@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { matchkey } from '../matchkeys/shareInsts/shareInsts.mjs';
+import { matchkey } from '../matchers/shareInsts/shareInsts.mjs';
 
 function assert(result, message) {
   if (result) {
