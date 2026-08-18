@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { matchkey } from '../matchkeys/goldrush2024/goldrush.mjs';
+import { matchkey } from '../matchers/goldrush2024/goldrush.mjs';
 
 function assert(result, message) {
   if (result) {

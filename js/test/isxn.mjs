@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { matchkey, normIsbn, normIssn } from '../matchkeys/isxn/isxn.mjs';
+import { matchkey, normIsbn, normIssn } from '../matchers/isxn/isxn.mjs';
 
 function assert(result, message) {
   if (result) {

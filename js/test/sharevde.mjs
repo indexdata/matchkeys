@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { matchkey } from '../matchkeys/sharevde/sharevde.mjs';
+import { matchkey } from '../matchers/sharevde/sharevde.mjs';
 
 function assert(result, message) {
   if (result) {

@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { matchkey } from '../matchkeys/deepdish/deepdish.mjs';
+import { matchkey } from '../matchers/deepdish/deepdish.mjs';
 
 function assert(result, message) {
   if (result) {
