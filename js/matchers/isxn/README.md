@@ -1,6 +1,6 @@
-# Matchkeys - isxn
+# Matcher - isxn
 
-The purpose of this matchkey is for clustering simply around isbn/issn and allow searching on them via SRU.
+The purpose of this matcher is for clustering simply around isbn/issn and allow searching on them via SRU.
 
 ## Configuration
 

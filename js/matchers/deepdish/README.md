@@ -1,6 +1,6 @@
-# Matchkeys - deepdish
+# Matcher - deepdish
 
-This matchkey returns an array of matches, using goldrush2024 and standard identifier numbers.
+This matcher returns an array of matches, using goldrush2024 and standard identifier numbers.
 
 The matcher will do the following:
 
