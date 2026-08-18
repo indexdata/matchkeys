@@ -1,7 +1,7 @@
-name: verify-matchkey
+name: verify-matcher
 
 env:
-  documentation: 'https://github.com/indexdata/matchkeys/blob/main/js/README.md#conduct-tests'
+  documentation: 'https://github.com/indexdata/reservoir-scripts/blob/main/js/README.md#conduct-tests'
   NODEJS_VERSION: '24'
 
 on:
@@ -10,7 +10,7 @@ on:
       - '**.mjs'
       - '**.js'
       - 'js/test/**.json'
-      - '.github/workflows/verify-matchkey.yml'
+      - '.github/workflows/verify-matcher.yml'
   pull_request:
     types: [opened, synchronize, reopened]
     paths:
@@ -22,7 +22,7 @@ permissions:
   contents: read
 
 jobs:
-  verify-matchkey:
+  verify-matcher:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -55,35 +55,35 @@ jobs:
             echo "changed_file: ${changed_file}"
           done
 
-      - name: Determine matchkeys
-        id: determine-matchkeys
+      - name: Determine matchers
+        id: determine-matchers
         env:
           FILES_LIST: ${{ steps.files.outputs.all }}
         run: |
-          matchkeys=$(python3 ../.github/workflows/scripts/determine_matchkeys.py -l info)
-          echo "matchkeys=$matchkeys" | tee -a "$GITHUB_OUTPUT"
+          matchers=$(python3 ../.github/workflows/scripts/determine_matchers.py -l info)
+          echo "matchers=$matchers" | tee -a "$GITHUB_OUTPUT"
 
-      - name: Show determined matchkeys
+      - name: Show determined matchers
         env:
-          MATCHKEYS: ${{ steps.determine-matchkeys.outputs.matchkeys }}
+          MATCHERS: ${{ steps.determine-matchers.outputs.matchers }}
         run: |
-          if [ -n "$MATCHKEYS" ]; then
-            echo "Determined modified matchkeys: $MATCHKEYS" | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ -n "$MATCHERS" ]; then
+            echo "Determined modified matchers: $MATCHERS" | tee -a "$GITHUB_STEP_SUMMARY"
           else
-            echo "No modified matchkeys were determined." | tee -a "$GITHUB_STEP_SUMMARY"
+            echo "No modified matchers were determined." | tee -a "$GITHUB_STEP_SUMMARY"
           fi
 
-      - name: Run test of relevant matchkeys
+      - name: Run test of relevant matchers
         env:
-          MATCHKEYS: ${{ steps.determine-matchkeys.outputs.matchkeys }}
-        if: ${{ steps.determine-matchkeys.outputs.matchkeys != '' }}
+          MATCHERS: ${{ steps.determine-matchers.outputs.matchers }}
+        if: ${{ steps.determine-matchers.outputs.matchers != '' }}
         run: |
           echo "See the run step logs for test results." >> "$GITHUB_STEP_SUMMARY"
-          for matchkey in $MATCHKEYS; do
-            test_script="test/${matchkey}.mjs"
+          for matcher in $MATCHERS; do
+            test_script="test/${matcher}.mjs"
             if [ -f "$test_script" ]; then
-              echo "Running test: ${matchkey} ..." | tee -a "$GITHUB_STEP_SUMMARY"
-              npm run "test-${matchkey}"
+              echo "Running test: ${matcher} ..." | tee -a "$GITHUB_STEP_SUMMARY"
+              npm run "test-${matcher}"
             else
               echo "The test script '${test_script}' does not exist."
               exit 1

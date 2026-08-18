@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Determine relevant matchkeys from the list of touched files.
+Determine relevant matchers from the list of touched files.
 
 NOTE: Please use 'black' to re-format code.
 """
@@ -14,7 +14,7 @@ from pathlib import Path
 import re
 import sys
 
-SCRIPT_VERSION = "1.2.1"
+SCRIPT_VERSION = "1.3.0"
 
 LOGLEVELS = {
     "debug": logging.DEBUG,
@@ -76,13 +76,13 @@ def collate_assertions_test_records(input_fn):
     return assertion_records
 
 
-def gather_matchkeys_test_records():
+def gather_matchers_test_records():
     """
     Inspects each assertions file
-    and composes list of record files for each matchkey.
+    and composes list of record files for each matcher.
     """
     assertion_re = r"assertions-([^\.]+)\.json$"
-    matchkeys_records = {}
+    matchers_records = {}
     dir_test = Path("test")
     files_assertions = list(dir_test.glob("assertions*.json"))
     for input_fn in files_assertions:
@@ -93,81 +93,81 @@ def gather_matchkeys_test_records():
             if assertion == "deepdish-goldrush2024":
                 assertion = "deepdish"
             try:
-                matchkeys_records[assertion]
+                matchers_records[assertion]
             except KeyError:
-                matchkeys_records[assertion] = set([])
+                matchers_records[assertion] = set([])
             assertion_records = collate_assertions_test_records(input_fn)
             for record_fn in assertion_records:
-                matchkeys_records[assertion].add(f"js/{record_fn}")
-    return matchkeys_records
+                matchers_records[assertion].add(f"js/{record_fn}")
+    return matchers_records
 
 
-def detect_matchkey_for_record(matchkeys_records, record_fn):
+def detect_matcher_for_record(matchers_records, record_fn):
     """
-    Detect matchkeys that utilise this record file.
+    Detect matchers that utilise this record file.
     """
-    matchkeys = []
-    for matchkey in matchkeys_records.keys():
-        if record_fn in matchkeys_records[matchkey]:
-            matchkeys.append(matchkey)
-    return matchkeys
+    matchers = []
+    for matcher in matchers_records.keys():
+        if record_fn in matchers_records[matcher]:
+            matchers.append(matcher)
+    return matchers
 
 
 def main():
     """
-    Determine relevant matchkeys from the list of touched files.
+    Determine relevant matchers from the list of touched files.
 
     Returns:
-        Space-delimited string of matchkey names.
+        Space-delimited string of matcher names.
     """
     files_list = get_options()
     LOGGER.debug("files_list=%s", files_list)
-    matchkey_src_re = r"^js/matchkeys/([^/]+)/.+\.mjs$"
+    matcher_src_re = r"^js/matchers/([^/]+)/.+\.mjs$"
     test_src_re = r"^js/test/([^.]+)\.mjs$"
     test_assertion_re = r"js/test/assertions-([^\.]+)\.json$"
-    matchkey_name_re = r"^[0-9a-zA-Z-]+$"
-    matchkey_errors = False
-    matchkeys_records = gather_matchkeys_test_records()
-    # pprint.pprint(matchkeys_records)
-    matchkeys = set()
+    matcher_name_re = r"^[0-9a-zA-Z-]+$"
+    matcher_errors = False
+    matchers_records = gather_matchers_test_records()
+    # pprint.pprint(matchers_records)
+    matchers = set()
     for input_fn in files_list.split():
-        match = re.search(matchkey_src_re, input_fn)
+        match = re.search(matcher_src_re, input_fn)
         if match:
-            matchkeys.add(match.group(1))
+            matchers.add(match.group(1))
         match = re.search(test_src_re, input_fn)
         if match:
-            matchkeys.add(match.group(1))
+            matchers.add(match.group(1))
         match = re.search(test_assertion_re, input_fn)
         if match:
-            matchkeys.add(match.group(1))
+            matchers.add(match.group(1))
         # Handle some special files:
         if input_fn == "js/test/assertions-deepdish-goldrush2024.json":
-            matchkeys.add("deepdish")
-            matchkeys.discard("deepdish-goldrush2024")
-        if input_fn == "js/matchkeys/goldrush/goldrush.mjs":
-            matchkeys.add("goldrush2021")
-            matchkeys.discard("goldrush")
+            matchers.add("deepdish")
+            matchers.discard("deepdish-goldrush2024")
+        if input_fn == "js/matchers/goldrush/goldrush.mjs":
+            matchers.add("goldrush2021")
+            matchers.discard("goldrush")
         # Detect changed related assertions records.
-        for matchkey in detect_matchkey_for_record(matchkeys_records, input_fn):
-            matchkeys.add(matchkey)
-    for matchkey in matchkeys:
-        match = re.search(matchkey_name_re, matchkey)
+        for matcher in detect_matcher_for_record(matchers_records, input_fn):
+            matchers.add(matcher)
+    for matcher in matchers:
+        match = re.search(matcher_name_re, matcher)
         if not match:
             msg = (
-                f"matchkey '{matchkey}': "
-                "The matchkey names are restricted to alpha-numeric "
+                f"matcher '{matcher}': "
+                "The matcher names are restricted to alpha-numeric "
                 "or hyphen (dash) characters."
             )
             LOGGER.error(msg)
-            matchkey_errors = True
-        dir_matchkey = Path(f"matchkeys/{matchkey}")
-        if not dir_matchkey.exists():
-            LOGGER.error("The matchkey '%s' does not exist.", matchkey)
-            matchkey_errors = True
-    if matchkey_errors:
+            matcher_errors = True
+        dir_matcher = Path(f"matchers/{matcher}")
+        if not dir_matcher.exists():
+            LOGGER.error("The matcher '%s' does not exist.", matcher)
+            matcher_errors = True
+    if matcher_errors:
         sys.exit(1)
-    LOGGER.info("Determined %s matchkeys.", len(matchkeys))
-    print(" ".join(matchkeys))
+    LOGGER.info("Determined %s matchers.", len(matchers))
+    print(" ".join(matchers))
 
 
 if __name__ == "__main__":
