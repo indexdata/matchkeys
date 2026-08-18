@@ -14,7 +14,7 @@ from pathlib import Path
 import re
 import sys
 
-SCRIPT_VERSION = "1.3.0"
+SCRIPT_VERSION = "1.3.1"
 
 LOGLEVELS = {
     "debug": logging.DEBUG,
@@ -160,6 +160,8 @@ def main():
             )
             LOGGER.error(msg)
             matcher_errors = True
+        if matcher in ["goldrush2021"]:
+            continue
         dir_matcher = Path(f"matchers/{matcher}")
         if not dir_matcher.exists():
             LOGGER.error("The matcher '%s' does not exist.", matcher)
