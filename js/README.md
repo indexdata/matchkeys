@@ -3,32 +3,32 @@
 ## Table of contents
 
 <!-- $GH_FOLIO/okapi/doc/md2toc -l 2 -h 4 README.md -->
-* [Matchkeys](#matchkeys)
+* [Matchers](#matchers)
 * [Transformers](#transformers)
     * [999 subfield definitions](#999-subfield-definitions)
         * [999 10 (source holdings record)](#999-10-source-holdings-record)
         * [999 11 (library items)](#999-11-library-items)
         * [999 12 (online items)](#999-12-online-items)
         * [999 13 (vendor entries)](#999-13-vendor-entries)
-* [Development of matchkeys](#development-of-matchkeys)
+* [Development of matchers](#development-of-matchers)
     * [Overview](#overview)
     * [editorconfig](#editorconfig)
-    * [Verify matchkeys development](#verify-matchkeys-development)
+    * [Verify matchers development](#verify-matchers-development)
         * [biome-check](#biome-check)
         * [biome-check-write](#biome-check-write)
         * [Conduct tests](#conduct-tests)
 * [GitHub Workflows Actions](#github-workflows-actions)
     * [Workflow biome-check](#workflow-biome-check)
-    * [Workflow verify-matchkey](#workflow-verify-matchkey)
+    * [Workflow verify-matcher](#workflow-verify-matcher)
     * [Workflow schedule-deployment](#workflow-schedule-deployment)
 
-## Matchkeys
+## Matchers
 
-Matchkeys utilise some specific elements from MARC bibliographic records to generate a unique string which identifies common records that describe the same instance.
+Matchers utilise some specific elements from MARC bibliographic records to generate a unique string which identifies common records that describe the same instance.
 
-The various matchkeys implementations are explained at [js/matchkeys](matchkeys).
+The various matchers implementations are explained at [js/matchers](matchers).
 
-Refer also to Reservoir operations documentation about [server configuration](https://github.com/indexdata/reservoir/blob/master/docs/ops/configure.md) of Matchkeys.
+Refer also to Reservoir operations documentation about [server configuration](https://github.com/indexdata/reservoir/blob/master/docs/ops/configure.md) of matchers and pools.
 
 ## Transformers
 
@@ -100,33 +100,33 @@ collects MARC fields from all member records and creates field `999_10` for each
 }
 ```
 
-## Development of matchkeys
+## Development of matchers
 
 ### Overview
 
-The various matchkeys implementations are explained at [js/matchkeys](matchkeys).
+The various matchers implementations are explained at [js/matchers](matchers).
 
-Each matchkey has its own directory (e.g. [js/matchkeys/goldrush2024](matchkeys/goldrush2024)) with a README, and example Reservoir configuration files, and the matchkey implementation as a JavaScript module `.mjs` file.
+Each matcher has its own directory (e.g. [js/matchers/goldrush2024](matchers/goldrush2024)) with a README, and example Reservoir configuration files, and the matcher implementation as a JavaScript module `.mjs` file.
 
-Each matchkey has tests in the [js/test](test) directory with a JavaScript module (e.g. [js/test/goldrush2024.mjs](test/goldrush2024.mjs)), and a set of assertions (e.g. [js/test/assertions-goldrush2024.json](test/assertions-goldrush2024.json)) which declare the expected matchkey result for processing each associated example record.
+Each matcher has tests in the [js/test](test) directory with a JavaScript module (e.g. [js/test/goldrush2024.mjs](test/goldrush2024.mjs)), and a set of assertions (e.g. [js/test/assertions-goldrush2024.json](test/assertions-goldrush2024.json)) which declare the expected matchkey result for processing each associated example record.
 
-The directory [js/test/records](test/records) holds the MARC JSON records. There can be sub-directories to organise the records. Records can be associated with multiple matchkeys, so if records are modified then ensure that the related assertions are adjusted to suit.
+The directory [js/test/records](test/records) holds the MARC JSON records. There can be sub-directories to organise the records. Records can be associated with multiple matchers, so if records are modified then ensure that the related assertions are adjusted to suit.
 
-Each matchkey is briefly explained in the [js/matchkeys/README.md](matchkeys/README.md) with a link to its implementation.
+Each matcher is briefly explained in the [js/matchers/README.md](matchers/README.md) with a link to its implementation.
 
-For each matchkey there is an entry in the [js/package.json](package.json) file to declare its test to be run using Node.js (e.g. `test-goldrush2024`).
+For each matcher there is an entry in the [js/package.json](package.json) file to declare its test to be run using Node.js (e.g. `test-goldrush2024`).
 
-To add a new matchkey, follow the structure of an existing matchkey.
+To add a new matcher, follow the structure of an existing matcher.
 
 > [!IMPORTANT]
-> The matchkey names are restricted to alpha-numeric or hyphen (dash) characters.
+> The matcher names are restricted to alpha-numeric or hyphen (dash) characters.
 
 ### editorconfig
 
 There is a [.editorconfig](../.editorconfig) file at the top-level of this repository.
 See notes to [Configure your editor](https://dev.folio.org/faqs/how-to-use-editorconfig/).
 
-### Verify matchkeys development
+### Verify matchers development
 
 Do 'npm install' to install and configure [Biome](https://biomejs.dev).
 Our configuration is deliberately minimal, but is sufficient to ensure consistency.
@@ -163,10 +163,10 @@ npm run biome-check-write -- --unsafe
 
 #### Conduct tests
 
-Ensure that the matchkey tests do pass.
+Ensure that the matcher tests do pass.
 
 There are some sample MARC files in the [js/test/records](test/records) directory.
-Each matchkey has a set of assertions in the [js/test](test) directory.
+Each matcher has a set of assertions in the [js/test](test) directory.
 
 For example do:
 
@@ -176,35 +176,35 @@ npm run test-goldrush2024
 
 ## GitHub Workflows Actions
 
-There is a set of [Workflow Actions](https://github.com/indexdata/matchkeys/actions) for development and deployment.
+There is a set of [Workflow Actions](https://github.com/indexdata/reservoir-scripts/actions) for development and deployment.
 
 ### Workflow biome-check
 
-The [biome-check](https://github.com/indexdata/matchkeys/actions/workflows/biome-check.yml) Workflow will be triggered by any modification to JavaScript and JSON files.
+The [biome-check](https://github.com/indexdata/reservoir-scripts/actions/workflows/biome-check.yml) Workflow will be triggered by any modification to JavaScript and JSON files.
 
 See documentation above for the pre-commit local [biome-check](#biome-check) checks and fixes.
 
-### Workflow verify-matchkey
+### Workflow verify-matcher
 
-The [verify-matchkey](https://github.com/indexdata/matchkeys/actions/workflows/verify-matchkey.yml) Workflow will be triggered by any modification to JavaScript files or JSON files.
+The [verify-matcher](https://github.com/indexdata/reservoir-scripts/actions/workflows/verify-matcher.yml) Workflow will be triggered by any modification to JavaScript files or JSON files.
 
 See documentation above for the local pre-commit [Conduct tests](#conduct-tests) facilities.
 
-The Workflow will discover the changed files and will run the test for each associated matchkey.
+The Workflow will discover the changed files and will run the test for each associated matcher.
 
 Note that there is currently a tiny glitch with this workflow. The first git push for a branch will fail, but subsequent pushes will operate properly. There is a workaround to push an initial branch with no modifications, then push subsequent changes.
 
 ### Workflow schedule-deployment
 
-The [schedule-deployment](https://github.com/indexdata/matchkeys/actions/workflows/schedule-deployment.yml) Workflow adds an entry to the [schedule-matchkeys.jsonl](schedule-matchkeys.jsonl) file.
+The [schedule-deployment](https://github.com/indexdata/reservoir-scripts/actions/workflows/schedule-deployment.yml) Workflow adds an entry to the [schedule-deployments.jsonl](schedule-deployments.jsonl) file.
 
-Other back-room processes will conduct the deployment of the matchkeys and the pool, and will notify when the deployment is done.
+Other back-room processes will conduct the deployment of the matchers and the pool, and will notify when the deployment is done.
 
-When a matchkey is ready, then select the Workflow and trigger a run via the workflow_dispatch event (i.e. select `Run workflow` on the right-hand side).
+When a matcher is ready, then select the Workflow and trigger a run via the workflow_dispatch event (i.e. select `Run workflow` on the right-hand side).
 
 Specify the branch (note that `main` branch is not allowed).
 
-For each matchkey that is to form the pool, specify its matchkey name and the relevant git commit as a short commit hash SHA. This is a comma-separated list of matchkeys.
+For each matcher that is to form the pool, specify its matcher name and the relevant git commit as a short commit hash SHA. This is a comma-separated list of matchers.
 
 For example `goldrush2024:1163910,isxn:e902d0a`
 
