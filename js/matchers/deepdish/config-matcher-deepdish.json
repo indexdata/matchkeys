@@ -1,0 +1,5 @@
+{
+  "id": "deepdish-matcher",
+  "type": "javascript",
+  "url": "https://raw.githubusercontent.com/indexdata/reservoir-scripts/c91cb9be131c5d3a3cf57d1c00e2dce94abe0991/js/matchers/deepdish/deepdish.mjs"
+}
