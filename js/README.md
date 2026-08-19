@@ -198,14 +198,17 @@ Note that there is currently a tiny glitch with this workflow. The first git pus
 
 The [schedule-deployment](https://github.com/indexdata/reservoir-scripts/actions/workflows/schedule-deployment.yml) Workflow adds an entry to the [schedule-deployments.jsonl](schedule-deployments.jsonl) file.
 
-Other back-room processes will conduct the deployment of the matchers and the pool, and will notify when the deployment is done.
+Other back-room processes will conduct the deployment of the matchers and the pool.
 
-When a matcher is ready, then select the Workflow and trigger a run via the workflow_dispatch event (i.e. select `Run workflow` on the right-hand side).
+When matchers are ready, then select the Workflow and trigger a run via the workflow_dispatch event (i.e. select `Run workflow` on the right-hand side).
 
 Specify the branch (note that `main` branch is not allowed).
 
-For each matcher that is to form the pool, specify its matcher name and the relevant git commit as a short commit hash SHA. This is a comma-separated list of matchers.
+For each matcher that is to form the pool, specify its matcher name. This is a comma-separated list of matchers.
 
-For example `goldrush2024:1163910,isxn:e902d0a`
+For example `goldrush2024,isxn`
 
 Specify the `action` "add or remove".
+
+The Workflow will determine the short git commit SHA for the head of the branch.
+
