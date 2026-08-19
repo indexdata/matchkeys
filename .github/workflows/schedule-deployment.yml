@@ -15,7 +15,7 @@ on:
           - 'add'
           - 'remove'
       deployments:
-        description: 'List of matchers with commit hash SHA e.g. goldrush2024:1163910,isxn:e902d0a'
+        description: 'List of matchers, e.g. goldrush2024,isxn'
         required: true
         type: string
 
@@ -48,31 +48,13 @@ jobs:
           # declare -p deployments
           declare -a errors
           declare -a schedules
-          for deployment in "${deployments[@]}"; do
-            echo "deployment=${deployment}"
-            if [[ ! "${deployment}" =~ : ]]; then
-              errors+=("Missing colon delimiter in deployment '${deployment}'.")
-              continue
-            fi
-            matcher=$(echo "${deployment}" | cut -d ':' -f 1)
+          for matcher in "${deployments[@]}"; do
             echo "matcher=${matcher}"
             if ! [ -d "js/matchers/${matcher}" ]; then
               errors+=("The matcher '${matcher}' is not found.")
               continue
             fi
-            sha=$(echo "${deployment}" | cut -d ':' -f 2)
-            echo "sha=${sha}"
-            if [ -z "${sha}" ]; then
-              errors+=("The SHA declaration is missing for matcher '${matcher}'.")
-              continue
-            fi
-            sha_short=$(echo "${sha}" | cut -c 1-7)
-            branch=$(git name-rev --name-only "${sha_short}" 2>&1 | sed 's/[~^].*$//')
-            if [[ "${branch}" =~ .*"Could not get".* ]]; then
-              errors+=("Could not find SHA '${sha_short}' for matcher '${matcher}'.")
-              continue
-            fi
-            echo "branch=${branch}"
+            sha_short=$(git rev-parse HEAD | cut -c 1-7)
             schedules+=("${matcher}:${sha_short}")
           done
           if [ ${#errors[@]} -gt 0 ]; then
