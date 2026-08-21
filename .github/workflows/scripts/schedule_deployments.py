@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 import sys
 
-SCRIPT_VERSION = "1.3.0"
+SCRIPT_VERSION = "1.4.0"
 
 LOGLEVELS = {
     "debug": logging.DEBUG,
@@ -60,12 +60,17 @@ def get_options():
         LOGGER.error("Missing env: SCHEDULE")
         options_okay = False
     try:
+        dir_output = os.environ["DIR_OUTPUT"]
+    except KeyError:
+        LOGGER.error("Missing env: DIR_OUTPUT")
+        options_okay = False
+    try:
         job_id = os.environ["JOB_ID"]
     except KeyError:
         LOGGER.error("Missing env: JOB_ID")
         options_okay = False
     schedule_pn = PROG_PATH.parent.parent.parent.joinpath(
-        "js/schedule-deployments.jsonl"
+        dir_output, "schedule-deployments.jsonl"
     )
     if not options_okay:
         sys.exit(2)
