@@ -99,11 +99,11 @@ jobs:
 
       - name: Commit git changes and push
         run: |
+          cp -f cp/schedule-deployments.jsonl ${{ secrets.REPO_NAME_GITOPS }}
           cd ${{ secrets.REPO_NAME_GITOPS }}
           ls
           git config --global user.name "github-actions-reservoir-scripts"
           git config --global user.email "github-actions-reservoir-scripts@indexdata.com"
-          cp -f ../cp/schedule-deployments.jsonl .
           git add schedule-deployments.jsonl
           git status
           git commit -m "Apply schedule deployments"
