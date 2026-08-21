@@ -69,16 +69,6 @@ jobs:
         run: |
           echo "schedule: ${{ inputs.action }}: ${{ steps.verify-inputs.outputs.schedule }}" >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Append JSONL to file
-        env:
-          ACTION: ${{ inputs.action }}
-          SCHEDULE: ${{ steps.verify-inputs.outputs.schedule }}
-          JOB_ID: ${{ github.run_number }}
-        run: python3 .github/workflows/scripts/schedule_deployments.py -l info
-
-      - name: Show recent schedule
-        run: tail -5 js/schedule-deployments.jsonl
-
       - name: Create GitHub App Token
         id: app-token
         uses: actions/create-github-app-token@v3
@@ -97,15 +87,26 @@ jobs:
           path: ${{ secrets.REPO_NAME_GITOPS }}
           token: ${{ steps.app-token.outputs.token }}
 
+      - name: Append JSONL to file
+        env:
+          ACTION: ${{ inputs.action }}
+          SCHEDULE: ${{ steps.verify-inputs.outputs.schedule }}
+          DIR_OUTPUT: ${{ secrets.REPO_NAME_GITOPS }}
+          JOB_ID: ${{ github.run_number }}
+        run: python3 .github/workflows/scripts/schedule_deployments.py -l info
+
+#      - name: Show recent schedule
+#        run: tail -5 ${{ secrets.REPO_NAME_GITOPS }}/schedule-deployments.jsonl
+
       - name: Commit git changes and push
         run: |
-          cp -f cp/schedule-deployments.jsonl ${{ secrets.REPO_NAME_GITOPS }}
           cd ${{ secrets.REPO_NAME_GITOPS }}
           ls
           git config --global user.name "github-actions-reservoir-scripts"
           git config --global user.email "github-actions-reservoir-scripts@indexdata.com"
-          git add schedule-deployments.jsonl
+          echo "Here i are." >> test.txt
+          git add test.txt
           git status
-          git commit -m "Apply schedule deployments"
+          git commit -m "Do a test commit from afar"
           echo "Do git push ..."
           git push
