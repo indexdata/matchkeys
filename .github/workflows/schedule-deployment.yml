@@ -79,11 +79,33 @@ jobs:
       - name: Show recent schedule
         run: tail -5 js/schedule-deployments.jsonl
 
-      - name: Do git pull
-        run: git pull
-
-      - name: Commit git changes
-        uses: stefanzweifel/git-auto-commit-action@v7
+      - name: Create GitHub App Token
+        id: app-token
+        uses: actions/create-github-app-token@v3
         with:
-          commit_message: Apply schedule deployments
-          file_pattern: js/schedule-deployments.jsonl
+          # FIXME: actionlint complains about client-id so use deprecated app-id (See actionlint #648 #669)
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: indexdata
+          repositories: ${{ secrets.REPO_NAME_GITOPS }}
+          permission-contents: write
+
+      - name: Checkout GitOps Repository
+        uses: actions/checkout@v7
+        with:
+          repository: indexdata/${{ secrets.REPO_NAME_GITOPS }}
+          path: ${{ secrets.REPO_NAME_GITOPS }}
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Commit git changes and push
+        run: |
+          cd ${{ secrets.REPO_NAME_GITOPS }}
+          ls
+          git config --global user.name "github-actions-reservoir-scripts"
+          git config --global user.email "github-actions-reservoir-scripts@indexdata.com"
+          cp -f ../cp/schedule-deployments.jsonl .
+          git add schedule-deployments.jsonl
+          git status
+          git commit -m "Apply schedule deployments"
+          echo "Do git push ..."
+          git push
