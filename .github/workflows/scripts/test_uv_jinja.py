@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+"""
+Basic verification uv and jinja.
+"""
+
 # /// script
 # requires-python = ">=3.13"
 # dependencies = [
@@ -38,6 +42,7 @@ def get_options():
     Gets the command-line options.
     Verifies configuration.
     """
+    options_okay = True
     parser = argparse.ArgumentParser(description=PROG_DESC)
     parser.add_argument(
         "-l",
@@ -52,14 +57,26 @@ def get_options():
         LOGGER.setLevel(loglevel)
     LOGGER.info("Using script version: %s", SCRIPT_VERSION)
     print(sys.version_info)
+    templates_pn = PROG_PATH.joinpath("templates")
+    if not templates_pn.exists():
+        LOGGER.error("The jinja templates '%s' not found.", templates_pn)
+        options_okay = False
+    if not options_okay:
+        sys.exit(2)
+    return templates_pn
 
-    
+
 def main():
     """
-    Test uv.
+    Test jinja2 templates.
     """
-    get_options()
-    LOGGER.debug("Hello from uv")
+    templates_pn = get_options()
+    env = Environment(loader=FileSystemLoader(templates_pn))
+    template_cr = env.get_template("cr.yaml.jinja")
+    content_cr = template_cr.render(
+        mytext="FooBar",
+    )
+    pprint.pprint(content_cr)
 
 
 if __name__ == "__main__":

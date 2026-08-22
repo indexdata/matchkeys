@@ -6,7 +6,6 @@ on:
 
 jobs:
   test-uv-jinja:
-    name: python
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -17,10 +16,10 @@ jobs:
         with:
           version: "0.12.5"
           enable-cache: auto
-      
+
       - name: Set up uv Python
         run: |
           uv python install 3.13
-        
+
       - name: Do test
         run: uv run .github/workflows/scripts/test_uv_jinja.py -l debug
