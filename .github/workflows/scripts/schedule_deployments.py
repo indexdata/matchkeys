@@ -6,15 +6,27 @@ Append the schedule JSONL to schedule-deployments.jsonl file.
 NOTE: Please use 'black' to re-format code.
 """
 
+# /// script
+# requires-python = ">=3.13"
+# dependencies = [
+#   "jinja2",
+# ]
+# [tool.uv]
+# exclude-newer = "7 days"
+# ///
+
 import argparse
 from datetime import datetime, timezone
 import json
 import logging
 import os
 from pathlib import Path
+import pprint  # pylint: disable=unused-import
 import sys
 
-SCRIPT_VERSION = "1.4.0"
+from jinja2 import Environment, FileSystemLoader
+
+SCRIPT_VERSION = "1.5.0"
 
 LOGLEVELS = {
     "debug": logging.DEBUG,
@@ -69,12 +81,16 @@ def get_options():
     except KeyError:
         LOGGER.error("Missing env: JOB_ID")
         options_okay = False
+    templates_pn = PROG_PATH.joinpath("templates")
+    if not templates_pn.exists():
+        LOGGER.error("The jinja templates '%s' not found.", templates_pn)
+        options_okay = False
     schedule_pn = PROG_PATH.parent.parent.parent.joinpath(
         dir_output, "schedule-deployments.jsonl"
     )
     if not options_okay:
         sys.exit(2)
-    return int(job_id), action, schedule, schedule_pn
+    return int(job_id), action, schedule, templates_pn, schedule_pn
 
 
 def append_schedule(job_id, action, schedule, schedule_pn):
@@ -98,9 +114,15 @@ def main():
     """
     Append the schedule JSONL to schedule-deployments.jsonl file.
     """
-    job_id, action, schedule, schedule_pn = get_options()
+    job_id, action, schedule, templates_pn, schedule_pn = get_options()
     LOGGER.debug("schedule=%s schedule_pn=%s", schedule, schedule_pn)
     append_schedule(job_id, action, schedule, schedule_pn)
+    env_jinja = Environment(loader=FileSystemLoader(templates_pn))
+    template_cr = env_jinja.get_template("cr.yaml.jinja")
+    content_cr = template_cr.render(
+        mytext="FooBar",
+    )
+    pprint.pprint(content_cr)
 
 
 if __name__ == "__main__":
