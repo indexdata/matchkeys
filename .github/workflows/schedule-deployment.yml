@@ -64,8 +64,8 @@ jobs:
               errors+=("The matcher '${matcher}' is not found.")
               continue
             fi
-            sha_short=$(git rev-parse HEAD | cut -c 1-7)
-            schedules+=("${matcher}:${sha_short}")
+            sha=$(git rev-parse HEAD)
+            schedules+=("${matcher}:${sha}")
           done
           if [ ${#errors[@]} -gt 0 ]; then
             printf "ERROR: %s\n" "${errors[@]}"
@@ -90,7 +90,7 @@ jobs:
           repositories: ${{ secrets.REPO_NAME_GITOPS }}
           permission-contents: write
 
-      - name: Checkout GitOps Repository
+      - name: Checkout GitOps repository
         uses: actions/checkout@v7
         with:
           repository: indexdata/${{ secrets.REPO_NAME_GITOPS }}

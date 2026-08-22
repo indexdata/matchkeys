@@ -93,7 +93,7 @@ def get_options():
     return int(job_id), action, schedule, templates_pn, schedule_pn
 
 
-def append_schedule(job_id, action, schedule, schedule_pn):
+def append_schedule(job_id, action, id_pool, schedule_pn):
     """
     Composes the JSONL and appends to file.
     """
@@ -104,7 +104,7 @@ def append_schedule(job_id, action, schedule, schedule_pn):
     )
     json_packet["action"] = action
     json_packet["initialized"] = False
-    json_packet["deployment"] = schedule
+    json_packet["poolId"] = id_pool
     with open(schedule_pn, mode="a", encoding="utf-8") as output_fh:
         output_fh.write(json.dumps(json_packet, sort_keys=False, indent=None))
         output_fh.write("\n")
@@ -115,8 +115,16 @@ def main():
     Append the schedule JSONL to schedule-deployments.jsonl file.
     """
     job_id, action, schedule, templates_pn, schedule_pn = get_options()
-    LOGGER.debug("schedule=%s schedule_pn=%s", schedule, schedule_pn)
-    append_schedule(job_id, action, schedule, schedule_pn)
+    # LOGGER.debug("schedule=%s schedule_pn=%s", schedule, schedule_pn)
+    deployments = schedule.split(",")
+    matchers = []
+    id_pool = ""
+    for deployment in deployments:
+        matcher, sha = deployment.split(":")
+        id_matcher = f"{matcher}~{sha[0:7]}"
+        matchers.append(id_matcher)
+    id_pool = "_".join(matchers)
+    append_schedule(job_id, action, id_pool, schedule_pn)
     env_jinja = Environment(loader=FileSystemLoader(templates_pn))
     template_cr = env_jinja.get_template("cr.yaml.jinja")
     content_cr = template_cr.render(
