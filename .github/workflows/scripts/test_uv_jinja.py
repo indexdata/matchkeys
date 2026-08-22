@@ -51,6 +51,7 @@ def get_options():
         loglevel = LOGLEVELS.get(args.loglevel.lower(), logging.NOTSET)
         LOGGER.setLevel(loglevel)
     LOGGER.info("Using script version: %s", SCRIPT_VERSION)
+    print(sys.version_info)
 
     
 def main():

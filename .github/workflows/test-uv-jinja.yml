@@ -20,8 +20,7 @@ jobs:
       
       - name: Set up uv Python
         run: |
-          uv python install
-          python --version
+          uv python install 3.13
         
       - name: Do test
         run: uv run .github/workflows/scripts/test_uv_jinja.py -l debug
